@@ -21,7 +21,7 @@ The GitHub repositories are located located under the organization ["opendiffere
   - **opendp-ux**: [code](https://github.com/opendifferentialprivacy/opendp-ux) | [issues](https://github.com/opendifferentialprivacy/opendp-ux/issues) | [TravisCI](https://travis-ci.com/github/opendifferentialprivacy/opendp-ux)
     - OpenDP App for the MVP. 
     - Depositor/Analyst workflows.
-  - **opendp-schemas**: [code](https://github.com/opendifferentialprivacy/opendp-schemas) | [issues](https://github.com/opendifferentialprivacy/opendp-schemas/issues)
+  - **opendp-schemas**: [code](https://github.com/opendifferentialprivacy/opendp-schemas) | [issues](https://github.com/opendifferentialprivacy/opendp-schemas/issues) [TravisCI](https://travis-ci.com/github/opendifferentialprivacy/opendp-schemas)
     - Schemas for OpenDP. Repository may be used as submodule.
     - Includes the release schemas. Will contain code for converting release schemas to other formats (PDF reports, DDI XML, etc.)
 
