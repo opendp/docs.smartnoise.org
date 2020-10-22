@@ -28,7 +28,7 @@ The GitHub repositories are located located under the organization ["opendiffere
 
 ## SmartNoise 
 
-SmartNoise currently includes 4 inter-related repositories which build upon each other. 
+SmartNoise currently includes 4 inter-related repositories.
 
   - **smartnoise-core**: [code](https://github.com/opendifferentialprivacy/smartnoise-core) | [issues](https://github.com/opendifferentialprivacy/smartnoise-core/issues)
     - Initial OpenDP library in Rust. Previous names: smartnoise-core; yarrow
