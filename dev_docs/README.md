@@ -1,12 +1,19 @@
 # OpenDP Links
 (in progress)
 Links related to OpenDP development
+- [Public websites](#public-websites)
+- [UX](#ux)
+- [Project tracking](project-tracking)
+- [OpenDP Repositories])(opendp-repositories)
+- [SmartNoise Repositories])(smartnoise-repositories)
+- [GSuite users](#gsuite-users)
 
 ## Public websites:
 - [privacytools.seas.harvard.edu/opendp](https://privacytools.seas.harvard.edu/opendp) (HU Privacy Tools Project)
 - [opendp.io](https://projects.iq.harvard.edu/opendp)
 - [opendifferentialprivacy.github.io](http://opendifferentialprivacy.github.io/) (forwards to smartnoise)
 - [smartnoise.org](smartnoise.org)
+
 
 ## UX
 - Miro: [MVP UX Workflow](https://miro.com/app/board/o9J_kj6tycQ=/)
@@ -32,7 +39,7 @@ The GitHub repositories are located located under the organization ["opendiffere
 - **opendifferentialprivacy**: [GitHub org](https://github.com/opendifferentialprivacy)
 
 
-## OpenDP
+## OpenDP Repositories
 
   - **OpenDP-Experimental**: [code](https://github.com/opendifferentialprivacy/OpenDP-Experimental) | [issues](https://github.com/opendifferentialprivacy/OpenDP-Experimental/issues)
     - New library, under development. (Repository name to be changed.)
@@ -49,7 +56,7 @@ The GitHub repositories are located located under the organization ["opendiffere
     - Includes the release schemas. Will contain code for converting release schemas to other formats (PDF reports, DDI XML, etc.)
 
 
-## SmartNoise
+## SmartNoise repositories
 
 SmartNoise currently includes several inter-related repositories.
 
@@ -75,3 +82,13 @@ SmartNoise currently includes several inter-related repositories.
     - Previous name: smartnoise-samples
   - **smartnoise.org**: [code](https://github.com/opendifferentialprivacy/smartnoise.org) | [website](https://smartnoise.org)
     - Informational site
+
+## GSuite users
+
+- [GSuite](https://admin.google.com/) for opendp.io:
+  - admin@opendp.io  - admin account, billing, etc
+  - comms@opendp.io
+  - community@opendp.io - forwards to opendp-community@g.harvard.edu
+  - smartnoise@opendp.io - forwards to smartnoise-support slack channel
+  - whitenoise@opendp.io - forwards to smartnoise-support slack channel
+    - (will be removed)
