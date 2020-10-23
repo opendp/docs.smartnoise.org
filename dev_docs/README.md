@@ -3,9 +3,9 @@
 Links related to OpenDP development
 - [Public websites](#public-websites)
 - [UX](#ux)
-- [Project tracking](project-tracking)
-- [OpenDP Repositories])(opendp-repositories)
-- [SmartNoise Repositories])(smartnoise-repositories)
+- [Project tracking](#project-tracking)
+- [OpenDP Repositories](#opendp-repositories)
+- [SmartNoise Repositories](#smartnoise-repositories)
 - [GSuite users](#gsuite-users)
 
 ## Public websites:
