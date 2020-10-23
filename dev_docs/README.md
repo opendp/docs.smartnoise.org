@@ -7,8 +7,8 @@ Links related to OpenDP development. (In progress)
 - [GitHub Repositories](#github-repositories)
   - [OpenDP Repositories](#opendp-repositories)
   - [SmartNoise Repositories](#smartnoise-repositories)
-  - [Privacy Tools Project](#privacytoolsproject) (older)
-- [GSuite emails/users](#gsuite-emailsusers)
+  - [Privacy Tools Project](#privacytoolsproject-repositories) (older)
+- [GSuite Emails/Users](#gsuite-emailsusers)
 
 ## Public websites:
 - [psiprivacy.org](http://psiprivacy.org) - older demo site 
@@ -87,7 +87,7 @@ SmartNoise currently includes several inter-related repositories.
   - **smartnoise.org**: [code](https://github.com/opendifferentialprivacy/smartnoise.org) | [website](https://smartnoise.org)
     - Informational site
 
-## privacytoolsproject
+## privacytoolsproject repositories
 
   - **PSI**: [code](https://github.com/privacytoolsproject/PSI) | [issues](https://github.com/privacytoolsproject/PSI/issues) 
     - demo site: [psiprivacy.org](http://psiprivacy.org) 
@@ -99,7 +99,7 @@ SmartNoise currently includes several inter-related repositories.
 
 
   
-## GSuite users
+## GSuite Emails/Users
 
 - [GSuite](https://admin.google.com/) for opendp.io:
   - admin@opendp.io  - admin account, billing, etc
