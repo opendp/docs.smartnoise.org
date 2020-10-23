@@ -8,6 +8,11 @@ Links related to OpenDP development
 - [opendifferentialprivacy.github.io](http://opendifferentialprivacy.github.io/) (forwards to smartnoise)
 - [smartnoise.org](smartnoise.org)
 
+## UX
+- Miro: [MVP UX Workflow](https://miro.com/app/board/o9J_kj6tycQ=/)
+- [Wireframes (videos)](https://drive.google.com/drive/u/1/folders/1IFE8mmcCg4ROomP-ADWvdaZzJgutmgdj)
+- [Consolidated User Feedback](https://docs.google.com/presentation/d/1_BNWqttrkqzUCcubh5zYtLyir97Lj4lzBbS6SMz9QaE/edit#slide=id.p)
+
 ## Project tracking
 
 - [Weekly OpenDP Meeting Agenda/Notes](https://docs.google.com/document/d/10M5EceKtSAWA0czgIpLYG2jxCbzgXyKxT0HQjqvFdlQ/edit)
@@ -30,9 +35,11 @@ The GitHub repositories are located located under the organization ["opendiffere
 ## OpenDP
 
   - **OpenDP-Experimental**: [code](https://github.com/opendifferentialprivacy/OpenDP-Experimental) | [issues](https://github.com/opendifferentialprivacy/OpenDP-Experimental/issues)
-    - New library, under development.
+    - New library, under development. (Repository name to be changed.)
+    - Statistics:
+        - [Components, prioritized](https://docs.google.com/spreadsheets/d/132rAzbSDVCKqFZWeE-P8oOl9f23PzkvNwsrDV5LPkw4/edit#gid=0)
+        - [For MVP App](https://docs.google.com/spreadsheets/d/1L-LWTf7PMZBbCuQxSbAFQkZKEtb6AgsK3qF6lwY_xrA/edit#gid=0)
     - [Architecture Notes (google drive)](https://drive.google.com/drive/u/1/folders/1KBLbpg8G2jGstaCCqWXYw0sf9F1IR6Rn) | [Architecture Questions](https://docs.google.com/document/d/11ZX0Zb3XxVQdtXrkgIf4pwiay-IiH0x8iaa5NpHRCWA/edit)
-    - (Repository name to be changed.)
   - **opendp-ux**: [code](https://github.com/opendifferentialprivacy/opendp-ux) | [issues](https://github.com/opendifferentialprivacy/opendp-ux/issues) | [TravisCI](https://travis-ci.com/github/opendifferentialprivacy/opendp-ux)
     - Miro: [Data models](https://miro.com/app/board/o9J_kjGaN7E=/) | [Input/Output](https://miro.com/app/board/o9J_kiJHr4g=/)
     - OpenDP App for the MVP.
