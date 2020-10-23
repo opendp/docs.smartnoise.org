@@ -1,26 +1,22 @@
 # OpenDP Links
-(in progress)
-Links related to OpenDP development
-- [Public Websites](#public-websites)
-- [UX](#ux)
-- [Project Tracking](#project-tracking)
-- [OpenDP Repositories](#opendp-repositories)
-- [SmartNoise Repositories](#smartnoise-repositories)
-- [GSuite Users/Emails](#gsuite-usersemails)
 
-## Public Websites:
+Links related to OpenDP development. (In progress)
+- [Public websites](#public-websites)
+- [Project tracking](#project-tracking)
+- [UX](#ux)
+- [GitHub Repositories](#github-repositories)
+  - [OpenDP Repositories](#opendp-repositories)
+  - [SmartNoise Repositories](#smartnoise-repositories)
+- [GSuite emails/users](#gsuite-emailsusers)
+
+## Public websites:
 - [privacytools.seas.harvard.edu/opendp](https://privacytools.seas.harvard.edu/opendp) (HU Privacy Tools Project)
 - [opendp.io](https://projects.iq.harvard.edu/opendp)
 - [opendifferentialprivacy.github.io](http://opendifferentialprivacy.github.io/) (forwards to smartnoise)
 - [smartnoise.org](smartnoise.org)
 
 
-## UX
-- Miro: [MVP UX Workflow](https://miro.com/app/board/o9J_kj6tycQ=/)
-- [Wireframes (videos)](https://drive.google.com/drive/u/1/folders/1IFE8mmcCg4ROomP-ADWvdaZzJgutmgdj)
-- [Consolidated User Feedback](https://docs.google.com/presentation/d/1_BNWqttrkqzUCcubh5zYtLyir97Lj4lzBbS6SMz9QaE/edit#slide=id.p)
-
-## Project Tracking
+## Project tracking
 
 - [Weekly OpenDP Meeting Agenda/Notes](https://docs.google.com/document/d/10M5EceKtSAWA0czgIpLYG2jxCbzgXyKxT0HQjqvFdlQ/edit)
 - [MVP Project Board](https://github.com/orgs/opendifferentialprivacy/projects/2)
@@ -32,6 +28,11 @@ Links related to OpenDP development
   - [Project Constituents](https://miro.com/app/board/o9J_kiAGSws=/)
 - [MVP Google Drive](https://drive.google.com/drive/u/1/folders/0AHJNRfEnaIS2Uk9PVA)
   - [PSI Collaboration Google Drive](https://drive.google.com/drive/u/1/folders/0AL0Zu-Y8rawGUk9PVA) (older)
+
+## UX
+  - Miro: [MVP UX Workflow](https://miro.com/app/board/o9J_kj6tycQ=/)
+  - [Wireframes (videos)](https://drive.google.com/drive/u/1/folders/1IFE8mmcCg4ROomP-ADWvdaZzJgutmgdj)
+  - [Consolidated User Feedback](https://docs.google.com/presentation/d/1_BNWqttrkqzUCcubh5zYtLyir97Lj4lzBbS6SMz9QaE/edit#slide=id.p)
 
 ## GitHub Repositories
 
@@ -83,7 +84,7 @@ SmartNoise currently includes several inter-related repositories.
   - **smartnoise.org**: [code](https://github.com/opendifferentialprivacy/smartnoise.org) | [website](https://smartnoise.org)
     - Informational site
 
-## GSuite Users/Emails
+## GSuite users
 
 - [GSuite](https://admin.google.com/) for opendp.io:
   - admin@opendp.io  - admin account, billing, etc
