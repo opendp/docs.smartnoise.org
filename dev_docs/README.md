@@ -56,7 +56,7 @@ The GitHub repositories are located located under the organization ["opendiffere
   - **opendp-schemas**: [code](https://github.com/opendifferentialprivacy/opendp-schemas) | [issues](https://github.com/opendifferentialprivacy/opendp-schemas/issues) | [TravisCI](https://travis-ci.com/github/opendifferentialprivacy/opendp-schemas)
     - Schemas for OpenDP. Repository may be used as submodule.
     - Includes the release schemas. Will contain code for converting release schemas to other formats (PDF reports, DDI XML, etc.)
-
+  - **dp-test-datasets**: [code](https://github.com/opendifferentialprivacy/dp-test-datasets) | [issues](https://github.com/opendifferentialprivacy/dp-test-datasets/issues)
 
 ## SmartNoise repositories
 
