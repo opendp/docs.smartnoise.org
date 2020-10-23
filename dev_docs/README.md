@@ -7,9 +7,11 @@ Links related to OpenDP development. (In progress)
 - [GitHub Repositories](#github-repositories)
   - [OpenDP Repositories](#opendp-repositories)
   - [SmartNoise Repositories](#smartnoise-repositories)
+  - [Privacy Tools Project](#privacytoolsproject) (older)
 - [GSuite emails/users](#gsuite-emailsusers)
 
 ## Public websites:
+- [psiprivacy.org](http://psiprivacy.org) - older demo site 
 - [privacytools.seas.harvard.edu/opendp](https://privacytools.seas.harvard.edu/opendp) (HU Privacy Tools Project)
 - [opendp.io](https://projects.iq.harvard.edu/opendp)
 - [opendifferentialprivacy.github.io](http://opendifferentialprivacy.github.io/) (forwards to smartnoise)
@@ -85,6 +87,18 @@ SmartNoise currently includes several inter-related repositories.
   - **smartnoise.org**: [code](https://github.com/opendifferentialprivacy/smartnoise.org) | [website](https://smartnoise.org)
     - Informational site
 
+## privacytoolsproject
+
+  - **PSI**: [code](https://github.com/privacytoolsproject/PSI) | [issues](https://github.com/privacytoolsproject/PSI/issues) 
+    - demo site: [psiprivacy.org](http://psiprivacy.org) 
+        - javascript/R/django 
+  - **PSI-Library**: [code](https://github.com/privacytoolsproject/PSI-Library) | [issues](https://github.com/privacytoolsproject/PSI-Library/issues)
+    - psilence is a package for the R statistical language
+  - **cs208**: [code](https://github.com/privacytoolsproject/cs208) | [issues](https://github.com/privacytoolsproject/cs208/issues)
+    - Repository for CS208: Applied Privacy for Data Science
+
+
+  
 ## GSuite users
 
 - [GSuite](https://admin.google.com/) for opendp.io:
