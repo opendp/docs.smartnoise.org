@@ -1,14 +1,14 @@
 # OpenDP Links
 (in progress)
 Links related to OpenDP development
-- [Public websites](#public-websites)
+- [Public Websites](#public-websites)
 - [UX](#ux)
-- [Project tracking](#project-tracking)
+- [Project Tracking](#project-tracking)
 - [OpenDP Repositories](#opendp-repositories)
 - [SmartNoise Repositories](#smartnoise-repositories)
-- [GSuite users/emails](#gsuite-usersemails)
+- [GSuite Users/Emails](#gsuite-usersemails)
 
-## Public websites:
+## Public Websites:
 - [privacytools.seas.harvard.edu/opendp](https://privacytools.seas.harvard.edu/opendp) (HU Privacy Tools Project)
 - [opendp.io](https://projects.iq.harvard.edu/opendp)
 - [opendifferentialprivacy.github.io](http://opendifferentialprivacy.github.io/) (forwards to smartnoise)
@@ -20,7 +20,7 @@ Links related to OpenDP development
 - [Wireframes (videos)](https://drive.google.com/drive/u/1/folders/1IFE8mmcCg4ROomP-ADWvdaZzJgutmgdj)
 - [Consolidated User Feedback](https://docs.google.com/presentation/d/1_BNWqttrkqzUCcubh5zYtLyir97Lj4lzBbS6SMz9QaE/edit#slide=id.p)
 
-## Project tracking
+## Project Tracking
 
 - [Weekly OpenDP Meeting Agenda/Notes](https://docs.google.com/document/d/10M5EceKtSAWA0czgIpLYG2jxCbzgXyKxT0HQjqvFdlQ/edit)
 - [MVP Project Board](https://github.com/orgs/opendifferentialprivacy/projects/2)
