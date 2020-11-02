@@ -75,7 +75,7 @@ SmartNoise currently includes several inter-related repositories.
   - **smartnoise-core-python**: [code](https://github.com/opendifferentialprivacy/smartnoise-core-python) | [issues](https://github.com/opendifferentialprivacy/smartnoise-core-python/issues) | [TravisCI](https://travis-ci.com/github/opendifferentialprivacy/smartnoise-core)
     - Python bindings to **smartnoise-core**
       - PyPI: [opendp-smartnoise-core](https://pypi.org/project/opendp-smartnoise-core/)
-      - Python docs: (https://opendifferentialprivacy.github.io/smartnoise-core-python/)
+      - Python docs: [opendifferentialprivacy.github.io/smartnoise-core-python/](https://opendifferentialprivacy.github.io/smartnoise-core-python/)
     - Previous name: whitenoise-core-python
   - **smartnoise-sdk**: [code](https://github.com/opendifferentialprivacy/smartnoise-sdk) | [issues](https://github.com/opendifferentialprivacy/smartnoise-sdk/issues)
     - Tools and services for DP processing of tabular and relational data
