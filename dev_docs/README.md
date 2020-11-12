@@ -80,6 +80,7 @@ SmartNoise currently includes several inter-related repositories.
   - **smartnoise-sdk**: [code](https://github.com/opendifferentialprivacy/smartnoise-sdk) | [issues](https://github.com/opendifferentialprivacy/smartnoise-sdk/issues)
     - Tools and services for DP processing of tabular and relational data
     - Uses python bindings from **smartnoise-core-python**
+    - [SQL doc / Joshua](https://drive.google.com/file/d/10kkPky_ZJjp-gkwNhiV7aCiUh35qfDqL/view)
     - Previous name: whitenoise-system; burdock
   - **smartnoise-samples**: [code](https://github.com/opendifferentialprivacy/smartnoise-samples) | [issues](https://github.com/opendifferentialprivacy/smartnoise-samples/issues)
     - Includes Jupyter notebook examples
