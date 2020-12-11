@@ -60,6 +60,13 @@ The GitHub repositories are located located under the organization ["opendiffere
     - Includes the release schemas. Will contain code for converting release schemas to other formats (PDF reports, DDI XML, etc.)
   - **dp-test-datasets**: [code](https://github.com/opendifferentialprivacy/dp-test-datasets) | [issues](https://github.com/opendifferentialprivacy/dp-test-datasets/issues)
 
+### OpenDP/CSL Specific repositories
+
+Work related to the Consolidated Federated Learning (CSL) project in collaboration with BBN.
+
+  - **sotto-voce**: [code](https://github.com/opendifferentialprivacy/sotto-voce) | [issues](https://github.com/opendifferentialprivacy/sotto-voce/issues) 
+  - **sotto-voce-corpus**: [code](https://github.com/opendifferentialprivacy/sotto-voce-corpus) | [issues](https://github.com/opendifferentialprivacy/sotto-voce-corpus/issues) 
+    
 ## SmartNoise repositories
 
 SmartNoise currently includes several inter-related repositories.
