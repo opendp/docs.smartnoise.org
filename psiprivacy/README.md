@@ -26,3 +26,5 @@ Using the Azure web console, a new Kubernetes Servcie was created with the follo
   ```
   az network public-ip create --resource-group MC_OpenDP-ResourceGroup_OpenDP-Cluster01_eastus --name openDP-PSI_Privacy-IP --sku Standard --allocation-method static --query publicIp.ipAddress -o tsv
   ```
+  - resulting IP: `52.151.200.161`
+3. Add IP to the   
