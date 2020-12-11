@@ -1,6 +1,6 @@
 # Deploy Process of psiprivacy.org on Azure
 
-This page describes the deployment of the PSI Privacy application on Azure.
+This page describes the deployment of the PSI Privacy application on Azure via the Azure web portal as well as [Azure shell](https://shell.azure.com/)
 
 (Note: Consult team for passwords/access. e.g. LastPass)
 
