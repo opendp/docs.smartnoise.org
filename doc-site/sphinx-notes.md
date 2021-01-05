@@ -7,6 +7,9 @@ I ran this locally using Python 3.6.8
 mkdir sphinx-opendp
 cd sphinx-opendp
 mkvirtualenv sphinx-test
+
+# install smartnoise python bindings + Sphinx
+#
 pip install opendp-smartnoise-core Sphinx
 sphinx-quickstart
 ```
