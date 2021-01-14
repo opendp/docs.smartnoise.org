@@ -14,7 +14,6 @@ Subpackages
    smartnoise.evaluation
    smartnoise.mechanisms
    smartnoise.metadata
-   smartnoise.models
    smartnoise.reader
    smartnoise.sql
    smartnoise.synthesizers

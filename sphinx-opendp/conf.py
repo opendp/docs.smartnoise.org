@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('venv/lib/python3.8/site-packages/opendp/smartnoise/core'))
+sys.path.insert(0, os.path.abspath('venv/lib/python3.8/site-packages/smartnoise'))
 
 # -- Project information -----------------------------------------------------
 
@@ -30,6 +30,17 @@ release = '0.1.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'pydata_sphinx_theme']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.doctest',
+    'sphinx.ext.extlinks',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.napoleon',
+    'sphinx_gallery.gen_gallery',
+    'sphinx_multiversion',
+    'pydata_sphinx_theme'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

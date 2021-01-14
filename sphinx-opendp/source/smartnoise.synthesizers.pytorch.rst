@@ -1,14 +1,6 @@
 smartnoise.synthesizers.pytorch package
 =======================================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   smartnoise.synthesizers.pytorch.nn
-
 Submodules
 ----------
 
