@@ -12,26 +12,10 @@ smartnoise.core.api module
    :undoc-members:
    :show-inheritance:
 
-smartnoise.core.api\_pb2 module
--------------------------------
-
-.. automodule:: smartnoise.core.api_pb2
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 smartnoise.core.base module
 ---------------------------
 
 .. automodule:: smartnoise.core.base
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-smartnoise.core.base\_pb2 module
---------------------------------
-
-.. automodule:: smartnoise.core.base_pb2
    :members:
    :undoc-members:
    :show-inheritance:
@@ -44,26 +28,10 @@ smartnoise.core.components module
    :undoc-members:
    :show-inheritance:
 
-smartnoise.core.components\_pb2 module
---------------------------------------
-
-.. automodule:: smartnoise.core.components_pb2
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 smartnoise.core.value module
 ----------------------------
 
 .. automodule:: smartnoise.core.value
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-smartnoise.core.value\_pb2 module
----------------------------------
-
-.. automodule:: smartnoise.core.value_pb2
    :members:
    :undoc-members:
    :show-inheritance:
