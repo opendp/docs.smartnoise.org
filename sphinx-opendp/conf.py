@@ -35,6 +35,8 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.extlinks',
+    'sphinx.ext.intersphinx',
+#    'sphinx.ext.linkcode',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinx_gallery.gen_gallery',
@@ -71,16 +73,20 @@ html_theme_options = {
     "show_prev_next": False,
 }
 
-html_logo = "_static/opendp.png"
+html_logo = "_static/opendp_logo_draft4_820w.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# sphinx_gallery_conf = {
-#     'examples_dirs': '../examples',
-#     'gallery_dirs': 'auto_examples',
-#     # pypandoc enables rst to md conversion in downloadable notebooks
-#     'pypandoc': True,
-# }
+sphinx_gallery_conf = {
+    'examples_dirs': ['/Users/mikephelan/Documents/src/opendp-documentation/analysis', '/Users/mikephelan/Documents/src/opendp-documentation/attacks'],
+    'gallery_dirs': ['auto_examples', 'attacks'],
+    # pypandoc enables rst to md conversion in downloadable notebooks
+    'pypandoc': True,
+}
+
+html_sidebars = {
+    "**": ["version-sidebar.html", "sidebar-search-bs.html", "sidebar-nav-bs.html"],
+}
