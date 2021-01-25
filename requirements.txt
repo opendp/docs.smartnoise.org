@@ -10,3 +10,7 @@ scikit_learn==0.24.1
 scikit-image==0.18.1
 utils==1.0.1
 z3==0.2.0
+sphinx==3.4.3
+sphinx-gallery==0.8.2
+sphinx-multiversion==0.2.4
+pydata_sphinx_theme==0.4.2
