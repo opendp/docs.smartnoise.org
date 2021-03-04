@@ -111,10 +111,6 @@ SmartNoise currently includes several inter-related repositories.
   
 ## GSuite Emails/Users
 
-- [GSuite](https://admin.google.com/) for opendp.io:
-  - admin@opendp.io  - admin account, billing, etc
-  - comms@opendp.io
-  - community@opendp.io - forwards to opendp-community@g.harvard.edu
-  - smartnoise@opendp.io - forwards to smartnoise-support slack channel
-  - whitenoise@opendp.io - forwards to smartnoise-support slack channel
-    - (will be removed)
+- Google Workspaces - emails for opendp.org (and opendp.io)
+  - See [google drive "Communication"](https://drive.google.com/drive/u/0/folders/1gj-hpujPblEM0OoskJb-6RJ4TdoY3f8c)
+
