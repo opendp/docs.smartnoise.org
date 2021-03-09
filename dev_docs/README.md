@@ -46,8 +46,8 @@ The GitHub repositories are located located under the organization ["opendp"](ht
 
 ## OpenDP Repositories
 
-  - **OpenDP-Experimental**: [code](https://github.com/opendp/OpenDP-Experimental) | [issues](https://github.com/opendp/OpenDP-Experimental/issues)
-    - New library, under development. (Repository name to be changed.)
+  - **opendp**: [code](https://github.com/opendp/opendp) | [issues](https://github.com/opendp/opendp/issues)
+    - New library, under development.
     - Statistics:
         - [Components, prioritized](https://docs.google.com/spreadsheets/d/132rAzbSDVCKqFZWeE-P8oOl9f23PzkvNwsrDV5LPkw4/edit#gid=0)
         - [For MVP App](https://docs.google.com/spreadsheets/d/1L-LWTf7PMZBbCuQxSbAFQkZKEtb6AgsK3qF6lwY_xrA/edit#gid=0)
