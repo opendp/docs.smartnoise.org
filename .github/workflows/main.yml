@@ -34,6 +34,8 @@ jobs:
           make html
           cp -r build /tmp
           git fetch
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
           git checkout gh-pages
           rm -rf *
           echo test-docs.opendp.org > CNAME
