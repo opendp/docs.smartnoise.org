@@ -39,6 +39,7 @@ jobs:
           git checkout gh-pages
           rm -rf *
           echo test-docs.opendp.org > CNAME
+          touch .nojekyll
           cp -r /tmp/build/html/* .
           git add --all --force
           git commit --allow-empty-message --message "$(git log $(git rev-parse origin/main) --oneline --format=%B -n1 | head -n1)"
