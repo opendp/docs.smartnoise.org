@@ -20,4 +20,4 @@ make html
 open build/html/index.html
 ```
 
-- http://test-docs.opendp.org/
+Docs are currently deployed to http://test-docs.opendp.org
