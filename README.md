@@ -1,3 +1,17 @@
+# OpenDP Documentation
+
+The OpenDP documentation is currently under development and will be available in several weeks.
+
+For users of SmartNoise, please visit these repositories:
+ - The [SmartNoise Core Differential Privacy Library](https://github.com/opendp/smartnoise-core)
+ - The accompanying [SmartNoise SDK repository](https://github.com/opendp/smartnoise-sdk) and 
+ - For examples: [SmartNoise Samples repository](https://github.com/opendp/smartnoise-samples) 
+
+
+
+
+## Dev Notes
+
 ```
 python3 -m venv venv
 source venv/bin/activate
@@ -5,3 +19,5 @@ pip install -r requirements.txt
 make html
 open build/html/index.html
 ```
+
+- http://test-docs.opendp.org/
