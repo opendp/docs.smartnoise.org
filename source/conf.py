@@ -58,11 +58,16 @@ html_static_path = ['_static']
 html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, maps document names to template names.
-html_sidebars = {'**': ['searchbox.html', 'sidebartoc.html']}
+html_theme_options = {
+    'logo': 'images/opendp-logo.png',
+    'description': 'Developing Open Source Tools for Differential Privacy',
+}
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
 htmlhelp_basename = 'OpenDPdoc'
+
+#html_logo = "_static/images/opendp-logo.png"
 
 rst_prolog = """
 .. |toctitle| replace:: Contents:
