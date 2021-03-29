@@ -42,10 +42,10 @@ jobs:
           echo "for underscore directories" > .nojekyll
           cp -r /tmp/build/html/* .
           git add --all --force
-          git commit --allow-empty-message --message "$(git log $(git rev-parse origin/main) --oneline --format=%B -n1 | head -n1)"
-          git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
       - name: Push docs to gh-pages branch
         run: |
           echo "Push docs to gh-pages branch"
+          git commit --allow-empty-message --message "$(git log $(git rev-parse origin/main) --oneline --format=%B -n1 | head -n1)"
+          git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
           git push --force origin gh-pages
         continue-on-error: true
