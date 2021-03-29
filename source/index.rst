@@ -10,6 +10,7 @@ OpenDP documentation is organized into the guides below. This is version |versio
   :titlesonly:
   :maxdepth: 2
 
+  quickstart/index
   user/index
   contrib/index
 
