@@ -5,8 +5,21 @@ import os
 from datetime import datetime
 sys.path.insert(0, os.path.abspath('../../'))
 
+rootdir = os.path.join(os.getenv("SPHINX_MULTIVERSION_SOURCEDIR", default=os.getcwd()), "..")
+sys.path.insert(0, rootdir)
+print("*****************************************")
+[print(p) for p in sys.path]
+print("*****************************************")
+
+import opendp.smartnoise
+import opendp.smartnoise.synthesizers
+print(opendp.smartnoise.__spec__)
+print("*****************************************")
+
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
@@ -25,6 +38,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'OpenDP'
 copyright = u'%d' % datetime.now().year
+# release = opendp.smartnoise.__version__
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -59,15 +73,20 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, maps document names to template names.
 html_theme_options = {
-    'logo': 'images/opendp-logo.png',
-    'description': 'Developing Open Source Tools for Differential Privacy',
+    'logo_link': 'images/opendp-logo.png',
+    "github_url": "https://github.com/opendp"
 }
+
+html_theme = 'pydata_sphinx_theme'
+
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = 'sphinx'
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
 htmlhelp_basename = 'OpenDPdoc'
 
-#html_logo = "_static/images/opendp-logo.png"
+html_logo = "_static/images/opendp-logo.png"
 
 rst_prolog = """
 .. |toctitle| replace:: Contents:

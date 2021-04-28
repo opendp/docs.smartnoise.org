@@ -13,6 +13,7 @@ OpenDP documentation is organized into the guides below. In addition to browsing
   quickstart/index
   user/index
   contrib/index
+  api_reference/index
 
 This is version |version| of the guides.
 
