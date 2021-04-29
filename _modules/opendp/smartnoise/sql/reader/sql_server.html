@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opendp.smartnoise.sql.reader.sql_server &#8212; OpenDP</title>
+    
+  <link href="../../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../../index.html">
+  <img src="../../../../../_static/opendp-logo.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../quickstart/index.html">
+  Quickstart
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../contrib/index.html">
+  Contributor Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../smartnoise/index.html">
+  SmartNoise
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for opendp.smartnoise.sql.reader.sql_server</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SqlReader</span><span class="p">,</span> <span class="n">NameCompare</span>
+<span class="kn">from</span> <span class="nn">.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
+
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.ast</span> <span class="kn">import</span> <span class="n">Relation</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.tokens</span> <span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expression</span> <span class="kn">import</span> <span class="n">Expression</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expressions.numeric</span> <span class="kn">import</span> <span class="n">BareFunction</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expressions.sql</span> <span class="kn">import</span> <span class="n">BooleanJoinCriteria</span><span class="p">,</span> <span class="n">UsingJoinCriteria</span>
+
+
+<div class="viewcode-block" id="SqlServerReader"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.SqlServerReader">[docs]</a><span class="k">class</span> <span class="nc">SqlServerReader</span><span class="p">(</span><span class="n">SqlReader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A dumb pipe that gets a rowset back from a database using</span>
+<span class="sd">        a SQL string, and converts types to some useful subset</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Engine</span><span class="o">.</span><span class="n">SQL_SERVER</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">SqlServerNameCompare</span><span class="p">(),</span> <span class="n">SqlServerSerializer</span><span class="p">())</span>
+        <span class="kn">import</span> <span class="nn">pyodbc</span>  <span class="c1"># TODO do we add all reader dependencies as smartnoise-sdk dependencies?</span>
+
+        <span class="c1"># this reader would break in the module code as is</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">pyodbc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+
+        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;SA_PASSWORD&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SA_PASSWORD&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_connection_string</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SqlServerReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.SqlServerReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass strings to execute.  To execute ASTs, use execute_typed.&quot;</span><span class="p">)</span>
+        <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">)]</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">col_names</span> <span class="o">+</span> <span class="n">rows</span></div>
+
+<div class="viewcode-block" id="SqlServerReader.update_connection_string"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.SqlServerReader.update_connection_string">[docs]</a>    <span class="k">def</span> <span class="nf">update_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">=</span> <span class="s2">&quot;Server=</span><span class="si">{0}{1}</span><span class="s2">;UID=</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="s2">&quot;;Database=</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="s2">&quot;;PWD=</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">=</span> <span class="s2">&quot;Driver={ODBC Driver 17 for SQL Server};&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span></div>
+
+<div class="viewcode-block" id="SqlServerReader.switch_database"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.SqlServerReader.switch_database">[docs]</a>    <span class="k">def</span> <span class="nf">switch_database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dbname</span><span class="p">):</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;USE &quot;</span> <span class="o">+</span> <span class="n">dbname</span> <span class="o">+</span> <span class="s2">&quot;;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SqlServerReader.db_name"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.SqlServerReader.db_name">[docs]</a>    <span class="k">def</span> <span class="nf">db_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT DB_NAME();&quot;</span>
+        <span class="n">dbname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dbname</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">SqlServerSerializer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">re</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">find_nodes</span><span class="p">(</span><span class="n">BareFunction</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;RANDOM&quot;</span><span class="p">]:</span>
+            <span class="n">re</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NEWID&quot;</span>
+
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">find_nodes</span><span class="p">(</span><span class="n">Literal</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)]:</span>
+            <span class="n">b</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&#39;TRUE&#39;&quot;</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&#39;FALSE&#39;&quot;</span>
+
+        <span class="c1"># T-SQL doesn&#39;t support USING critera, rewrite to ON</span>
+        <span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">find_nodes</span><span class="p">(</span><span class="n">Relation</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">joins</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">joins</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="p">]:</span>
+            <span class="n">join_idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">rel</span><span class="o">.</span><span class="n">joins</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">criteria</span><span class="p">,</span> <span class="n">UsingJoinCriteria</span><span class="p">)]:</span>
+                <span class="n">join_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">identifiers</span>
+                <span class="k">if</span> <span class="n">rel</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">alias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">rel</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">alias</span> <span class="o">=</span> <span class="s2">&quot;PJXX&quot;</span>  <span class="c1"># should use a name scope manager here</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">alias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">alias</span> <span class="o">=</span> <span class="s2">&quot;PJYY&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">join_idx</span><span class="p">)</span>  <span class="c1"># should use naming scope</span>
+
+                <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">rel</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">alias</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">]</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">alias</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">]</span>
+                <span class="n">frag</span> <span class="o">=</span> <span class="s2">&quot; AND &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="n">r</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">BooleanJoinCriteria</span><span class="p">(</span><span class="n">Expression</span><span class="p">(</span><span class="n">frag</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SqlServerNameCompare</span><span class="p">(</span><span class="n">NameCompare</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_path</span> <span class="o">=</span> <span class="n">search_path</span> <span class="k">if</span> <span class="n">search_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;dbo&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">identifier_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">meta</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_escapes</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_escapes</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

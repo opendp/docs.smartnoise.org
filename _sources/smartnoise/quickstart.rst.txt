@@ -1,5 +1,5 @@
-Using OpenDP from Python
-========================
+SmartNoise Quickstart
+=====================
 
 .. contents:: |toctitle|
 	:local:
