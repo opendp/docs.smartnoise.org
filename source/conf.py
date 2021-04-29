@@ -38,7 +38,6 @@ master_doc = 'index'
 # General information about the project.
 project = u'OpenDP'
 copyright = u'%d' % datetime.now().year
-# release = opendp.smartnoise.__version__
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -73,7 +72,6 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, maps document names to template names.
 html_theme_options = {
-    'logo_link': 'images/opendp-logo.png',
     "github_url": "https://github.com/opendp"
 }
 
