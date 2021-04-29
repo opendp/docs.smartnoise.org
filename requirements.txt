@@ -1,2 +1,4 @@
 sphinx==3.5.2
 pydata-sphinx-theme
+opendp-smartnoise-core
+opendp-smartnoise
