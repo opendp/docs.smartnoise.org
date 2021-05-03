@@ -68,4 +68,4 @@ From the ``python`` directory, set an environment variable to the location of th
 .. code-block:: bash
 
     export OPENDP_LIB_DIR=../rust/target/debug
-    python -v
+    pytest -v

@@ -281,7 +281,7 @@ pip install -e .
 <h2><a class="toc-backref" href="#id8">Run the Tests</a><a class="headerlink" href="#run-the-tests" title="Permalink to this headline">¶</a></h2>
 <p>From the <code class="docutils literal notranslate"><span class="pre">python</span></code> directory, set an environment variable to the location of the OpenDP library you built. Then run the tests.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">OPENDP_LIB_DIR</span><span class="o">=</span>../rust/target/debug
-python -v
+pytest -v
 </pre></div>
 </div>
 </section>
