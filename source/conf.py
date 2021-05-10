@@ -23,7 +23,8 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinx.ext.graphviz'
+    'sphinx.ext.graphviz',
+    'sphinx_multiversion',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -76,6 +77,14 @@ html_theme_options = {
 }
 
 html_theme = 'pydata_sphinx_theme'
+
+# See https://pydata-sphinx-theme.readthedocs.io/en/v0.6.3/user_guide/configuring.html#configure-the-sidebar
+html_sidebars = {
+   '**': ['search-field.html', 'sidebar-nav-bs.html', 'versioning.html'],
+}
+
+# Whitelist pattern for branches (set to None to ignore all branches)
+smv_branch_whitelist = r'^main$'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
