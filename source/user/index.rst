@@ -6,3 +6,4 @@ User Guide
 .. toctree::
 
    intro
+   related-projects
