@@ -36,7 +36,7 @@ jobs:
           git config --global user.name "$GITHUB_ACTOR"
           git checkout gh-pages
           rm -rf *
-          echo test-docs.opendp.org > CNAME
+          echo docs.opendp.org > CNAME
           echo "for underscore directories" > .nojekyll
           cp -r /tmp/build/html/* .
           git add --all --force
