@@ -1,25 +1,20 @@
-Python
-======
+Development Environment
+=======================
 
-The main OpenDP repo contains Python bindings and associated tests. In order to contribute, you will need to build the OpenDP library, which is written in Rust. Our goal is to get a successful run of the tests.
+Follow the steps below to get an OpenDP development environment set up, including the ability to run tests in both Rust and Python.
 
 .. contents:: Contents:
 	:local:
 
-Install Languages
------------------
-
-The languages below need to be installed.
-
-Rust
-++++
+Install Rust
+------------
 
 Download Rust from the `Rust website`_.
 
 .. _Rust website: https://www.rust-lang.org
 
-Python
-++++++
+Install Python
+--------------
 
 Download Python from the `Python website`_.
 
@@ -38,12 +33,13 @@ Clone the repo and change into the ``opendp`` directory that's created.
 Build OpenDP
 ------------
 
-You will need Rust installed to build OpenDP. Change to the ``rust`` directory before attempting a build, and then return to the ``opendp`` directory.
+Change to the ``rust`` directory before attempting a build, run the tests, and then return to the ``opendp`` directory.
 
 .. code-block:: bash
 
     cd rust
     cargo build
+    cargo test
     cd ..
 
 Install Python Dependencies
