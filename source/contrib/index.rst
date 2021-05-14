@@ -7,5 +7,6 @@ How to contribute to OpenDP.
 
 .. toctree::
 
+   intro
    dev-environment
    pull-requests
