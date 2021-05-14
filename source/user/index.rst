@@ -7,6 +7,7 @@ User Guide
 
    intro
    jupyter-notebooks
+   api-reference
    opendp-commons
    faq
    related-projects
