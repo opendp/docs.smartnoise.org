@@ -29,3 +29,15 @@ Getting Help
 ------------
 
 To discuss your contribution with OpenDP developers, open an issue at https://github.com/opendp/opendp/issues
+
+Other OpenDP Projects
+---------------------
+
+This guide is oriented toward contributing to the OpenDP library but you can find other OpenDP projects to contribute to in the :doc:`/user/opendp-commons` section of the User Guide.
+
+In addition, you can contribute by participating in the OpenDP community by joining the `mailing list`_ and attending `events`_.
+
+If you have an interest in improving this documentation, please see :doc:`docs`.
+
+.. _mailing list: https://groups.google.com/a/g.harvard.edu/g/opendp-community
+.. _events: https://opendp.org/events
