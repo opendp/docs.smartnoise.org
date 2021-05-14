@@ -12,3 +12,4 @@ How to contribute to OpenDP.
    algorithms
    pull-requests
    docs
+   testing
