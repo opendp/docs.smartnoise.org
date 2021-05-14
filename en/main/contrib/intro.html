@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributor Guide &#8212; OpenDP</title>
+    <title>Introduction &#8212; OpenDP</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,8 +35,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction" href="intro.html" />
-    <link rel="prev" title="Related Projects" href="../user/related-projects.html" />
+    <link rel="next" title="Development Environment" href="dev-environment.html" />
+    <link rel="prev" title="Contributor Guide" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -83,7 +83,7 @@
 </li>
 
 <li class="toctree-l1 current active nav-item">
- <a class="current reference internal nav-link" href="#">
+ <a class="reference internal nav-link" href="index.html">
   Contributor Guide
  </a>
 </li>
@@ -129,9 +129,9 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Introduction
   </a>
  </li>
@@ -151,7 +151,7 @@
 </nav>
 <h6>Branches</h6>
 <ul>
-  <li><a href="index.html">main</a></li>
+  <li><a href="intro.html">main</a></li>
 </ul>
 
 
@@ -165,9 +165,34 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roadmap">
+   Roadmap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kanban-board">
+   Kanban Board
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issue-tracker">
+   Issue Tracker
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-help">
+   Getting Help
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -187,31 +212,35 @@
               
               <div>
                 
-  <section id="contributor-guide">
-<h1>Contributor Guide<a class="headerlink" href="#contributor-guide" title="Permalink to this headline">¶</a></h1>
-<p>How to contribute to OpenDP.</p>
-<p><strong>Contents:</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#roadmap">Roadmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#kanban-board">Kanban Board</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#issue-tracker">Issue Tracker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#getting-help">Getting Help</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="dev-environment.html">Development Environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#install-rust">Install Rust</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#install-python">Install Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#clone-the-opendp-repo">Clone the OpenDP Repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#build-opendp">Build OpenDP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#install-python-dependencies">Install Python Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev-environment.html#run-the-tests">Run the Tests</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pull-requests.html">Making Pull Requests</a></li>
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Thanks for your interest in contributing to OpenDP!</p>
+<div class="contents local topic" id="toctitle">
+<p class="topic-title">Contents:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#roadmap" id="id1">Roadmap</a></p></li>
+<li><p><a class="reference internal" href="#kanban-board" id="id2">Kanban Board</a></p></li>
+<li><p><a class="reference internal" href="#issue-tracker" id="id3">Issue Tracker</a></p></li>
+<li><p><a class="reference internal" href="#getting-help" id="id4">Getting Help</a></p></li>
 </ul>
 </div>
+<section id="roadmap">
+<h2><a class="toc-backref" href="#id1">Roadmap</a><a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
+<p>For the OpenDP roadmap, see <a class="reference external" href="https://opendp.org/roadmap">https://opendp.org/roadmap</a></p>
+</section>
+<section id="kanban-board">
+<h2><a class="toc-backref" href="#id2">Kanban Board</a><a class="headerlink" href="#kanban-board" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://github.com/orgs/opendp/projects/1">OpenDP Development</a> board is used to track progress of the OpenDP library and related components/systems.</p>
+</section>
+<section id="issue-tracker">
+<h2><a class="toc-backref" href="#id3">Issue Tracker</a><a class="headerlink" href="#issue-tracker" title="Permalink to this headline">¶</a></h2>
+<p>The main issue tracker for the OpenDP library can be found at <a class="reference external" href="https://github.com/opendp/opendp/issues">https://github.com/opendp/opendp/issues</a></p>
+<p>Other projects in the <a class="reference internal" href="../user/opendp-commons.html"><span class="doc">OpenDP Commons</span></a> have their own issue trackers.</p>
+</section>
+<section id="getting-help">
+<h2><a class="toc-backref" href="#id4">Getting Help</a><a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>To discuss your contribution with OpenDP developers, open an issue at <a class="reference external" href="https://github.com/opendp/opendp/issues">https://github.com/opendp/opendp/issues</a></p>
+</section>
 </section>
 
 
@@ -220,8 +249,8 @@
               
               <div class='prev-next-bottom'>
                 
-    <a class='left-prev' id="prev-link" href="../user/related-projects.html" title="previous page">Related Projects</a>
-    <a class='right-next' id="next-link" href="intro.html" title="next page">Introduction</a>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">Contributor Guide</a>
+    <a class='right-next' id="next-link" href="dev-environment.html" title="next page">Development Environment</a>
 
               </div>
               
