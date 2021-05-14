@@ -6,4 +6,5 @@ User Guide
 .. toctree::
 
    intro
+   opendp-commons
    related-projects
