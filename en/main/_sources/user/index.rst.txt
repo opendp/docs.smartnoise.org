@@ -6,6 +6,7 @@ User Guide
 .. toctree::
 
    intro
+   jupyter-notebooks
    opendp-commons
    faq
    related-projects
