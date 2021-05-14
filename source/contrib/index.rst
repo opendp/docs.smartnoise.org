@@ -13,3 +13,4 @@ How to contribute to OpenDP.
    pull-requests
    docs
    testing
+   making-releases
