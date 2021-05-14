@@ -9,4 +9,5 @@ How to contribute to OpenDP.
 
    intro
    dev-environment
+   algorithms
    pull-requests
