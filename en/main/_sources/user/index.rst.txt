@@ -7,4 +7,5 @@ User Guide
 
    intro
    opendp-commons
+   faq
    related-projects
