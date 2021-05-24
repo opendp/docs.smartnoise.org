@@ -67,9 +67,11 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 
 .. _smartnoise-samples: SDK: https://github.com/opendp/smartnoise-samples
 
-- `Sample Analysis Notebooks`_ which include a brief tutorial and SmartNoise examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selectin impact utitlity, and working with unknown dataset sizes.
+- `Sample Analysis Notebooks`_  include a brief tutorial as well as SmartNoise examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selectin impact utitlity, and working with unknown dataset sizes.
 - `Attack Notebooks`_ demonstrate both a simple attack and how SmartNoise can mitigate as well as a database reconstruction attack.
+- `SmartNoise Whitepaper Demo Notebooks`_ Based on the Microsoft Whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine with differential privac and an example of creating synthetic data with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentifcation attack.
 
 .. _Sample Analysis Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/analysis
 .. _Attack Notebooks: https://github.com/opendp/smartnoise-samples/tree/docs-notebooks/attacks
-
+.. _Microsoft SmartNoise Differential Privacy Machine Learning Case Studies: https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/
+.. _SmartNoise Whitepaper Demo Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/whitepaper-demos
