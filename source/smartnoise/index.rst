@@ -5,6 +5,7 @@ SmartNoise
 
 .. toctree::
 
+   quickstart
    api-reference/index
 
 .. contents:: :local:
@@ -43,7 +44,14 @@ SmartNoise project includes four GitHub repositories:
 .. _smartnoise-sdk: https://github.com/opendp/smartnoise-sdk
 .. _smartnoise-samples: https://github.com/opendp/smartnoise-samples
 
+|smartnoise-repositories|
+
 .. |smartnoise-repositories| image:: ../_static/images/smartnoise-repositories.png
+   :class: img-responsive
+
+|smartnoise-repositories-numbered|
+
+.. |smartnoise-repositories-numbered| image:: ../_static/images/smartnoise-repositories-numbered.png
    :class: img-responsive
 
 
