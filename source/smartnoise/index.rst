@@ -37,7 +37,7 @@ SmartNoise project includes four GitHub repositories:
 3. `smartnoise-sdk`_ - The SDK includes tools built upon the  Python bindings.
 4. `smartnoise-samples`_ - A set of exemplar notebooks which range from demonstrating basic functionality and utility to showing how to create synthetic data with high utility for machine learning.
 
-.. _Quickstart and Notebooks: https://docs.opendp.org/en/main/smartnoise/
+.. _Quickstart and Notebooks: https://docs.opendp.org/en/main/smartnoise/index.rst#quickstart-and-notebooks
 .. _smartnoise-core: https://github.com/opendp/smartnoise-core
 .. _smartnoise-core-python: https://github.com/opendp/smartnoise-core-python
 .. _smartnoise-sdk: https://github.com/opendp/smartnoise-sdk
