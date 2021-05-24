@@ -26,21 +26,26 @@ The mechanisms library provides a fast, memory-safe native runtime for validatin
 Differentially private computations are specified as an analysis graph that can be validated and executed to produce differentially private releases of data. Releases include metadata about accuracy of outputs and the complete privacy cost of the analysis.
 
 
-
 SmartNoise Repository Orientation
 ---------------------------------
 
-SmartNoise project includes four GitHub repositories.
+SmartNoise project includes four GitHub repositories:
+(Don't worry about remembering them all. In practice, use of SmartNoise normally includes installation of a single python package as shown in the next section: `Quickstart and Notebooks`_.)
 
+1. `smartnoise-core`_ - A `Rust`_ runtime and validator which include an `extensive set of components (Rust docs)`_
+2. `smartnoise-core-python`_ - Python bindings which provide access to the `components (Python docs)`_.
+3. `smartnoise-sdk`_ - The SDK includes tools built upon the  Python bindings.
+4. `smartnoise-samples`_ - A set of exemplar notebooks which range from demonstrating basic functionality and utility to showing how to create synthetic data with high utility for machine learning.
 
-The SmartNoise project is composed of:
-
-1. A `Rust`_ runtime and validator which include an `extensive set of components`_
-2. `Python bindings`_ which provide access to the components
-3. A SmartNoise SDK which uses the SmartNoise Python bindings
-
-.. _extensive set of components: https://opendp.github.io/smartnoise-core/doc/smartnoise_validator/docs/components/index.html
+.. _Quickstart and Notebooks: https://docs.opendp.org/en/main/smartnoise/
+.. _smartnoise-core: https://github.com/opendp/smartnoise-core
+.. _smartnoise-core-python: https://github.com/opendp/smartnoise-core-python
+.. _smartnoise-sdk: https://github.com/opendp/smartnoise-sdk
+.. _smartnoise-samples: https://github.com/opendp/smartnoise-samples
+.. _extensive set of components (Rust docs): https://opendp.github.io/smartnoise-core/doc/smartnoise_validator/docs/components/index.html
 .. _Python bindings: https://docs.opendp.org/en/main/smartnoise/api-reference/opendp.smartnoise.core.components.html
+.. _components (Python docs): https://docs.opendp.org/en/main/smartnoise/api-reference/opendp.smartnoise.core.components.html
+
 .. _Rust: https://todo-WHY-RUST
 
 
@@ -67,9 +72,9 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 
 .. _smartnoise-samples: SDK: https://github.com/opendp/smartnoise-samples
 
-- `Sample Analysis Notebooks`_  include a brief tutorial as well as SmartNoise examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selectin impact utitlity, and working with unknown dataset sizes.
-- `Attack Notebooks`_ demonstrate both a simple attack and how SmartNoise can mitigate as well as a database reconstruction attack.
-- `SmartNoise Whitepaper Demo Notebooks`_ Based on the Microsoft Whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine with differential privac and an example of creating synthetic data with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentifcation attack.
+- `Sample Analysis Notebooks`_  includes a brief tutorial as well as SmartNoise examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selection impact utility, and working with unknown dataset sizes.
+- `Attack Notebooks`_ demonstrate how SmartNoise mitigate a basic attack and as well as a database reconstruction attack.
+- `SmartNoise Whitepaper Demo Notebooks`_ Based on the whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine with differential privac and an example of creating synthetic data with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.
 
 .. _Sample Analysis Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/analysis
 .. _Attack Notebooks: https://github.com/opendp/smartnoise-samples/tree/docs-notebooks/attacks
