@@ -1,4 +1,5 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+![CI](https://github.com/opendp/opendp-documentation/actions/workflows/main.yml/badge.svg)
 
 # OpenDP Documentation
 
