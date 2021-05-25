@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>opendp.smartnoise.sql package &#8212; OpenDP</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="opendp.smartnoise.core.value package" href="opendp.smartnoise.core.value.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/opendp-logo.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../quickstart/index.html">
+  Quickstart
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../contrib/index.html">
+  Contributor Guide
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  SmartNoise
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   SmartNoise Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   SmartNoise API Reference
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="opendp.smartnoise.core.api.html">
+     opendp.smartnoise.core.api package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="opendp.smartnoise.core.base.html">
+     opendp.smartnoise.core.base package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="opendp.smartnoise.core.components.html">
+     opendp.smartnoise.core.components package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="opendp.smartnoise.core.value.html">
+     opendp.smartnoise.core.value package
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     opendp.smartnoise.sql package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+<h6>Branches</h6>
+<ul>
+  <li><a href="opendp.smartnoise.sql.html">latest</a></li>
+</ul>
+
+
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="module-opendp.smartnoise.sql">
+<span id="opendp-smartnoise-sql-package"></span><h1>opendp.smartnoise.sql package<a class="headerlink" href="#module-opendp.smartnoise.sql" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.PandasReader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">PandasReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/pandas.html#PandasReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PandasReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">opendp.smartnoise.sql.reader.base.SqlReader</span></code></p>
+<dl class="py attribute">
+<dt id="opendp.smartnoise.sql.PandasReader.ENGINE">
+<code class="sig-name descname"><span class="pre">ENGINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'pandas'</span></em><a class="headerlink" href="#opendp.smartnoise.sql.PandasReader.ENGINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PandasReader.db_name">
+<code class="sig-name descname"><span class="pre">db_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/pandas.html#PandasReader.db_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PandasReader.db_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the database associated with this connection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PandasReader.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/pandas.html#PandasReader.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PandasReader.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a raw SQL string against the database and returns
+tuples for rows.  This will NOT fix the query to target the
+specific SQL dialect.  Call execute_typed to fix dialect.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.PostgresReader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">PostgresReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/postgres.html#PostgresReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PostgresReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">opendp.smartnoise.sql.reader.base.SqlReader</span></code></p>
+<p>A dumb pipe that gets a rowset back from a database using
+a SQL string, and converts types to some useful subset</p>
+<dl class="py attribute">
+<dt id="opendp.smartnoise.sql.PostgresReader.ENGINE">
+<code class="sig-name descname"><span class="pre">ENGINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'postgres'</span></em><a class="headerlink" href="#opendp.smartnoise.sql.PostgresReader.ENGINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PostgresReader.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/postgres.html#PostgresReader.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PostgresReader.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PostgresReader.switch_database">
+<code class="sig-name descname"><span class="pre">switch_database</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/postgres.html#PostgresReader.switch_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PostgresReader.switch_database" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PostgresReader.update_connection_string">
+<code class="sig-name descname"><span class="pre">update_connection_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/postgres.html#PostgresReader.update_connection_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PostgresReader.update_connection_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a parsed AST and returns a typed recordset.
+Will fix to target approprate dialect. Needs symbols.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.PrestoReader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">PrestoReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/presto.html#PrestoReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">opendp.smartnoise.sql.reader.base.SqlReader</span></code></p>
+<p>A dumb pipe that gets a rowset back from a database using
+a SQL string, and converts types to some useful subset</p>
+<dl class="py attribute">
+<dt id="opendp.smartnoise.sql.PrestoReader.ENGINE">
+<code class="sig-name descname"><span class="pre">ENGINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Presto'</span></em><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader.ENGINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PrestoReader.db_name">
+<code class="sig-name descname"><span class="pre">db_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/presto.html#PrestoReader.db_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader.db_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PrestoReader.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/presto.html#PrestoReader.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a raw SQL string against the database and returns
+tuples for rows.  This will NOT fix the query to target the
+specific SQL dialect.  Call execute_typed to fix dialect.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PrestoReader.switch_database">
+<code class="sig-name descname"><span class="pre">switch_database</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/presto.html#PrestoReader.switch_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader.switch_database" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.PrestoReader.update_connection_string">
+<code class="sig-name descname"><span class="pre">update_connection_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/presto.html#PrestoReader.update_connection_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.PrestoReader.update_connection_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.QueryParser">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">QueryParser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.parse_expression">
+<code class="sig-name descname"><span class="pre">parse_expression</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.parse_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.parse_expression" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.parse_named_expressions">
+<code class="sig-name descname"><span class="pre">parse_named_expressions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.parse_named_expressions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.parse_named_expressions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.parse_only">
+<code class="sig-name descname"><span class="pre">parse_only</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.parse_only"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.parse_only" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.queries">
+<code class="sig-name descname"><span class="pre">queries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.queries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.queries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.query">
+<code class="sig-name descname"><span class="pre">query</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.QueryParser.start_parser">
+<code class="sig-name descname"><span class="pre">start_parser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/parse.html#QueryParser.start_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.QueryParser.start_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.Rewriter">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">Rewriter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Modifies parsed ASTs to augment with information needed
+to support differential privacy.  Uses a matching
+object which contains metadata necessary for differential
+privacy, such as min/max, cardinality, and key columns.</p>
+<p>This routine is intended to be used prior to post-processing
+with random noise generation.</p>
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.calculate_avg">
+<code class="sig-name descname"><span class="pre">calculate_avg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.calculate_avg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.calculate_avg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an expression for a noisy mean and rewrites
+to a noisy sum and a noisy count</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.calculate_stddev">
+<code class="sig-name descname"><span class="pre">calculate_stddev</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.calculate_stddev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.calculate_stddev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the standard deviation from the variance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.calculate_variance">
+<code class="sig-name descname"><span class="pre">calculate_variance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.calculate_variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.calculate_variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the variance from avg of squares and square of averages</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.clamp_expression">
+<code class="sig-name descname"><span class="pre">clamp_expression</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_clamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.clamp_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.clamp_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup the expression referenced in each named expression and
+write a clamped select for it, using the schema</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.exact_aggregates">
+<code class="sig-name descname"><span class="pre">exact_aggregates</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.exact_aggregates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.exact_aggregates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.key_col">
+<code class="sig-name descname"><span class="pre">key_col</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.key_col"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.key_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the key column, given a from clause</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.per_key_clamped">
+<code class="sig-name descname"><span class="pre">per_key_clamped</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.per_key_clamped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.per_key_clamped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.per_key_random">
+<code class="sig-name descname"><span class="pre">per_key_random</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.per_key_random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.per_key_random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.push_sum_or_count">
+<code class="sig-name descname"><span class="pre">push_sum_or_count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.push_sum_or_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.push_sum_or_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push a sum or count expression to child scope
+and convert to a sum</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.query">
+<code class="sig-name descname"><span class="pre">query</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.rewrite_agg_expression">
+<code class="sig-name descname"><span class="pre">rewrite_agg_expression</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agg_exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.rewrite_agg_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.rewrite_agg_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>rewrite AVG, VAR, etc. and push all sum or count
+to child scope</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.Rewriter.rewrite_outer_named_expression">
+<code class="sig-name descname"><span class="pre">rewrite_outer_named_expression</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/private_rewriter.html#Rewriter.rewrite_outer_named_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.Rewriter.rewrite_outer_named_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>look for all the agg functions and rewrite them,
+preserving all other portions of expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.SparkReader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">SparkReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/spark.html#SparkReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SparkReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">opendp.smartnoise.sql.reader.base.SqlReader</span></code></p>
+<dl class="py attribute">
+<dt id="opendp.smartnoise.sql.SparkReader.ENGINE">
+<code class="sig-name descname"><span class="pre">ENGINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Spark'</span></em><a class="headerlink" href="#opendp.smartnoise.sql.SparkReader.ENGINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SparkReader.db_name">
+<code class="sig-name descname"><span class="pre">db_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/spark.html#SparkReader.db_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SparkReader.db_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SparkReader.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/spark.html#SparkReader.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SparkReader.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SparkReader.execute_typed">
+<code class="sig-name descname"><span class="pre">execute_typed</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/spark.html#SparkReader.execute_typed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SparkReader.execute_typed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.sql.SqlServerReader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">SqlServerReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/sql_server.html#SqlServerReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">opendp.smartnoise.sql.reader.base.SqlReader</span></code></p>
+<p>A dumb pipe that gets a rowset back from a database using
+a SQL string, and converts types to some useful subset</p>
+<dl class="py attribute">
+<dt id="opendp.smartnoise.sql.SqlServerReader.ENGINE">
+<code class="sig-name descname"><span class="pre">ENGINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'SqlServer'</span></em><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader.ENGINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SqlServerReader.db_name">
+<code class="sig-name descname"><span class="pre">db_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/sql_server.html#SqlServerReader.db_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader.db_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SqlServerReader.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/sql_server.html#SqlServerReader.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SqlServerReader.switch_database">
+<code class="sig-name descname"><span class="pre">switch_database</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/sql_server.html#SqlServerReader.switch_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader.switch_database" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.sql.SqlServerReader.update_connection_string">
+<code class="sig-name descname"><span class="pre">update_connection_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql/reader/sql_server.html#SqlServerReader.update_connection_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.SqlServerReader.update_connection_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.sql.execute_private_query">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.sql.</span></code><code class="sig-name descname"><span class="pre">execute_private_query</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/opendp/smartnoise/sql.html#execute_private_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.sql.execute_private_query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="opendp.smartnoise.core.value.html" title="previous page">opendp.smartnoise.core.value package</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
