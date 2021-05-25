@@ -1,4 +1,4 @@
 Jupyter Notebooks
 =================
 
-For now, see :doc:`/smartnoise/quickstart` for Jupyter notebooks written for SmartNoise.
+SmartNoise users: Please see :doc:`/smartnoise/overview` for links to Jupyter example notebooks.
