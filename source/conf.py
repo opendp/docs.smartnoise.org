@@ -85,7 +85,7 @@ html_sidebars = {
 }
 
 # Whitelist pattern for branches (set to None to ignore all branches)
-smv_branch_whitelist = r'^main$'
+smv_branch_whitelist = r'^latest$'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'

@@ -71,9 +71,8 @@ In practice, full SmartNoise functionality is available through a single `Python
 
    pip install opendp-smartnoise
 
-This package gives access to all of the `SmartNoise core components`_ as well as the `SmartNoise SDK`_.
+This package gives access to all of the :doc:`SmartNoise core components <api-reference/opendp.smartnoise.core.components>` as well as the `SmartNoise SDK`_.
 
-.. _SmartNoise core components: https://docs.opendp.org/en/main/smartnoise/api-reference/opendp.smartnoise.core.components.html
 .. _SmartNoise SDK: https://github.com/opendp/smartnoise-sdk
 
 
