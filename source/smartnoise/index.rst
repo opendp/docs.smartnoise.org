@@ -4,6 +4,5 @@ SmartNoise
 **Contents:**
 
 .. toctree::
-
-   quickstart
+   overview
    api-reference/index
