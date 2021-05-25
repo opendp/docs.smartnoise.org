@@ -1,7 +1,7 @@
 Quickstart
 ==========
 
-SmartNoise users, please see the :doc:`/smartnoise/introduction`.
+SmartNoise users, please see the :doc:`/smartnoise/overview`.
 
 (In the future, this section will describe how to use the `OpenDP Library`_)
 

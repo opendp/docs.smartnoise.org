@@ -10,7 +10,7 @@ Introduction
 
 |smartnoise-fig-education| |smartnoise-fig-simulations| |smartnoise-fig-size| |smartnoise-fig-utility|
 
-Differential privacy is the gold standard definition of privacy protection. The SmartNoise project endeavors to connect theoretical solutions from the academic community with the practical lessons learned from real-world deployments, to make differential privacy broadly accessible to future deployments. Specifically, we provide the following building blocks that can be used by people involved with sensitive data, with implementations based on vetted and mature differential privacy research:
+Differential privacy is the gold standard definition of privacy protection. The SmartNoise project endeavors to connect theoretical solutions from the academic community with the practical lessons learned from real-world deployments, to make differential privacy broadly accessible to future deployments. Specifically, we provide to people involved with sensitive data the following building blocks with implementations based on vetted and mature differential privacy research:
 
 - A pluggable open source library of differentially private algorithms and mechanisms for releasing privacy preserving queries and statistics.
 - APIs for defining an analysis and a validator for evaluating these analyses and composing the total privacy loss on a dataset.
@@ -22,7 +22,7 @@ Differential privacy is the gold standard definition of privacy protection. The 
 
   - Perform privacy algorithm stochastic testing against differential privacy modules
 
-The mechanisms library provides a fast, memory-safe native runtime for validating and running differentially private analyses. The runtime and validator are built in Rust, while Python support.
+The mechanisms library provides a fast, memory-safe native runtime for validating and running differentially private analyses.
 
 Differentially private computations are specified as an analysis graph that can be validated and executed to produce differentially private releases of data. Releases include metadata about accuracy of outputs and the complete privacy cost of the analysis.
 
@@ -40,11 +40,11 @@ The diagram below shows how the SmartNoise GitHub repositories interconnect.
 
 |smartnoise-repositories|
 
-1. `smartnoise-core`_ - The core Rust runtime and validator which include an `extensive set of components (Rust docs)`_
+1. `smartnoise-core`_ - The core Rust runtime and validator which include an `extensive set of components (Rust docs)`_.
 2. `smartnoise-core-python`_ - :doc:`Python bindings <api-reference/opendp.smartnoise.core.components>` which provide access to the Rust core components.
 3. `smartnoise-sdk`_ - The SDK includes tools built upon the Python bindings.
 
-In addition the `smartnoise-samples`_ repository includes a set of exemplar notebooks which range from demonstrating basic functionality and utility to showing how to create synthetic dataset with high utility for machine learning.
+In addition the `smartnoise-samples`_ repository includes a set of exemplar notebooks which range from demonstrating basic functionality and utility to showing how to create a synthetic dataset with high utility for machine learning.
 
 .. _smartnoise-core: https://github.com/opendp/smartnoise-core
 .. _extensive set of components (Rust docs): https://opendp.github.io/smartnoise-core/doc/smartnoise_validator/docs/components/index.html
@@ -101,7 +101,7 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 - `Sample Analysis Notebooks`_  - In addition to a brief tutorial, there are examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selection impact utility, and working with unknown dataset sizes.
 - `Attack Notebooks`_ Walk-throughs of how SmartNoise mitigates basic attacks as well as a database reconstruction attack.
 - `SQL Data Access`_ Code examples and notebooks show how to issue SQL queries against CSV files, database engines, and Spark clusters.
-- `SmartNoise Whitepaper Demo Notebooks`_ Based on the whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine with differential privacy and an example of creating a synthetic dataset with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.
+- `SmartNoise Whitepaper Demo Notebooks`_ Based on the whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine learning with differential privacy and an example of creating a synthetic dataset with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.
 
 .. _Sample Analysis Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/analysis
 .. _Attack Notebooks: https://github.com/opendp/smartnoise-samples/tree/docs-notebooks/attacks
