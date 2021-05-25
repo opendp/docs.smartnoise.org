@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 17-sn-updates
+      #- 17-sn-updates
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
