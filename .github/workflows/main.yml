@@ -28,7 +28,6 @@ jobs:
         run: |
           echo "Install Sphinx and deploy docs..."
           python --version
-          pip install --upgrade setuptools
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
