@@ -105,6 +105,6 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 
 .. _Sample Analysis Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/analysis
 .. _Attack Notebooks: https://github.com/opendp/smartnoise-samples/tree/docs-notebooks/attacks
-.. _SQL Data Access Examples: https://github.com/opendp/smartnoise-samples/tree/master/data
+.. _SQL Data Access: https://github.com/opendp/smartnoise-samples/tree/master/data
 .. _Microsoft SmartNoise Differential Privacy Machine Learning Case Studies: https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/
 .. _SmartNoise Whitepaper Demo Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/whitepaper-demos
