@@ -79,9 +79,9 @@ html_theme_options = {
 html_theme = 'pydata_sphinx_theme'
 
 # See https://pydata-sphinx-theme.readthedocs.io/en/v0.6.3/user_guide/configuring.html#configure-the-sidebar
+# Note: Overridden in the Makefile for local builds. Be sure to update both places.
 html_sidebars = {
    '**': ['search-field.html', 'sidebar-nav-bs.html', 'versioning.html'],
-#   '**': ['search-field.html', 'sidebar-nav-bs.html',], # 'versioning.html'],
 }
 
 # Whitelist pattern for branches (set to None to ignore all branches)

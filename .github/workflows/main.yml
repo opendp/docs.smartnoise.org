@@ -31,7 +31,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          make html
+          make versions
           cp -r build /tmp
           git fetch
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
