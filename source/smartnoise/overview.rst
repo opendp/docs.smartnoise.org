@@ -98,9 +98,9 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 .. _smartnoise-samples repository: https://github.com/opendp/smartnoise-samples
 
 - `Sample Analysis Notebooks`_  - In addition to a brief tutorial, there are examples of histograms, differentially private covariance, how dataset size and privacy-loss parameter selection impact utility, and working with unknown dataset sizes.
-- `Attack Notebooks`_ Walk-throughs of how SmartNoise mitigates basic attacks as well as a database reconstruction attack.
-- `SQL Data Access`_ Code examples and notebooks show how to issue SQL queries against CSV files, database engines, and Spark clusters.
-- `SmartNoise Whitepaper Demo Notebooks`_ Based on the whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine learning with differential privacy and an example of creating a synthetic dataset with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.
+- `Attack Notebooks`_ - Walk-throughs of how SmartNoise mitigates basic attacks as well as a database reconstruction attack.
+- `SQL Data Access`_ - Code examples and notebooks show how to issue SQL queries against CSV files, database engines, and Spark clusters.
+- `SmartNoise Whitepaper Demo Notebooks`_ - Based on the whitepaper titled `Microsoft SmartNoise Differential Privacy Machine Learning Case Studies`_ these notebooks include a demonstration of how to perform supervised machine learning with differential privacy and an example of creating a synthetic dataset with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.
 
 .. _Sample Analysis Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/analysis
 .. _Attack Notebooks: https://github.com/opendp/smartnoise-samples/tree/docs-notebooks/attacks
