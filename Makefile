@@ -3,7 +3,8 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    = -W
-SPHINXBUILD   = sphinx-multiversion
+SPHINXBUILD   = sphinx-build
+SPHINXMULTI   = sphinx-multiversion
 PAPER         =
 BUILDDIR      = build
 
@@ -22,8 +23,13 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 html:
+	$(SPHINXBUILD) $(SPHINXOPTS) -D 'html_sidebars.**'=search-field.html,sidebar-nav-bs.html source $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+versions:
 	# "/en" is the default, but someday we might have translations
-	$(SPHINXBUILD) source $(BUILDDIR)/html/en
+	$(SPHINXMULTI) source $(BUILDDIR)/html/en
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 	cp redirect.html $(BUILDDIR)/html/index.html

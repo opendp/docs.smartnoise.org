@@ -10,7 +10,7 @@ For users of SmartNoise, please visit these repositories:
  - The accompanying [SmartNoise SDK repository](https://github.com/opendp/smartnoise-sdk) and 
  - For examples: [SmartNoise Samples repository](https://github.com/opendp/smartnoise-samples) 
 
-## Dev Notes
+## Building the Docs
 
 ```
 python3 -m venv venv
@@ -20,4 +20,10 @@ make html
 open build/html/index.html
 ```
 
-Docs are currently deployed to http://docs.opendp.org
+## Deployment
+
+Docs are deployed to http://docs.opendp.org using GitHub Actions.
+
+Note that `make html` is replaced with `make versions` to build multiple versions (branches, tags) using the [sphinx-multiversion][] extension.
+
+[sphinx-multiversion]: https://holzhaus.github.io/sphinx-multiversion/
