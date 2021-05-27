@@ -3,12 +3,9 @@
 
 # OpenDP Documentation
 
-The OpenDP documentation is currently under development.
+Note: The OpenDP documentation, [docs.opendp.org](docs.opendp.org), is currently under development.
 
-For users of SmartNoise, please visit these repositories:
- - The [SmartNoise Core Differential Privacy Library](https://github.com/opendp/smartnoise-core)
- - The accompanying [SmartNoise SDK repository](https://github.com/opendp/smartnoise-sdk) and 
- - For examples: [SmartNoise Samples repository](https://github.com/opendp/smartnoise-samples) 
+For users of SmartNoise, please visit: [docs.opendp.org/en/latest/smartnoise](https://docs.opendp.org/en/latest/smartnoise/)
 
 ## Building the Docs
 
