@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opendp.smartnoise.metadata.collection &#8212; OpenDP</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/opendp-logo.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../quickstart/index.html">
+  Quickstart
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib/index.html">
+  Contributor Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../smartnoise/index.html">
+  SmartNoise
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+<h6>Branches</h6>
+<ul>
+  <li><a href="collection.html">latest</a></li>
+</ul>
+
+
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for opendp.smartnoise.metadata.collection</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise.sql.reader.base</span> <span class="kn">import</span> <span class="n">NameCompare</span>
+
+<span class="c1"># implements spec at https://docs.google.com/document/d/1Q4lUKyEu2W9qQKq6A0dbo0dohgSUxitbdGhX97sUNOM/</span>
+
+
+<div class="viewcode-block" id="CollectionMetadata"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata">[docs]</a><span class="k">class</span> <span class="nc">CollectionMetadata</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Information about a collection of tabular data sources&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate a metadata object with information about tabular data sources</span>
+
+<span class="sd">        :param tables: A list of Table descriptions</span>
+<span class="sd">        :param engine: The name of the database engine used to query these tables.  Used for engine-</span>
+<span class="sd">            specific name escaping and comparison.  Set to None to use default semantics.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">t</span><span class="o">.</span><span class="n">table_name</span><span class="p">(),</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span> <span class="k">if</span> <span class="n">engine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;Unknown&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="n">NameCompare</span><span class="o">.</span><span class="n">get_name_compare</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="k">if</span> <span class="n">compare</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">compare</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+        <span class="n">schema_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">tablename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">schema_name</span><span class="p">,</span> <span class="n">tablename</span> <span class="o">=</span> <span class="n">parts</span>
+        <span class="k">for</span> <span class="n">tname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="o">.</span><span class="n">schema_match</span><span class="p">(</span>
+                <span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">schema</span>
+            <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="o">.</span><span class="n">identifier_match</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span>
+                <span class="k">return</span> <span class="n">table</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+
+<div class="viewcode-block" id="CollectionMetadata.tables"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.tables">[docs]</a>    <span class="k">def</span> <span class="nf">tables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span> <span class="k">for</span> <span class="n">tname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span></div>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">()</span>
+
+<div class="viewcode-block" id="CollectionMetadata.from_file"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_file">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load the metadata about this collection from a YAML file&quot;&quot;&quot;</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ys</span><span class="o">.</span><span class="n">read_file</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CollectionMetadata.from_dict"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load the metadata from a dict object&quot;&quot;&quot;</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ys</span><span class="o">.</span><span class="n">_create_metadata_object</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CollectionMetadata.to_file"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.to_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save collection metadata to a YAML file&quot;&quot;&quot;</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">ys</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">)</span></div></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Common attributes for a table or a view</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Table</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Information about a single tabular data source&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">schema</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">columns</span><span class="p">,</span>
+        <span class="n">rowcount</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">rows_exact</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">row_privacy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">max_ids</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">sample_max_ids</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">clamp_counts</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">clamp_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">use_dpsu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">censor_dims</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate information about a tabular data source.</span>
+
+<span class="sd">        :param schema: The schema is the SQL-92 schema used for disambiguating table names.  See</span>
+<span class="sd">            documentation for more information about schema search path and resolution.</span>
+<span class="sd">        :param name: The table name that will be used by SQL queries to reference data</span>
+<span class="sd">            in this table.</span>
+<span class="sd">        :param rowcount: The rough number of rows in this table.  Should not be the exact number, and does not need to be accurate</span>
+<span class="sd">        :param columns: A list of Column objects with information about each column in the table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">=</span> <span class="n">rowcount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_privacy</span> <span class="o">=</span> <span class="n">row_privacy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_ids</span> <span class="o">=</span> <span class="n">max_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_max_ids</span> <span class="o">=</span> <span class="n">sample_max_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows_exact</span> <span class="o">=</span> <span class="n">rows_exact</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_dpsu</span> <span class="o">=</span> <span class="n">use_dpsu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clamp_counts</span> <span class="o">=</span> <span class="n">clamp_counts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clamp_columns</span> <span class="o">=</span> <span class="n">clamp_columns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">censor_dims</span> <span class="o">=</span> <span class="n">censor_dims</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colname</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">cname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="p">[</span><span class="n">cname</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># the database will attach the engine-specific comparer usually</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="n">NameCompare</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="o">.</span><span class="n">identifier_match</span><span class="p">(</span><span class="n">colname</span><span class="p">,</span> <span class="n">col</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">col</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot; [&quot;</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rowcount</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot; rows]</span><span class="se">\n\t</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">key_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">is_key</span> <span class="o">==</span> <span class="kc">True</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">table_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">String</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A column with string data&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">card</span><span class="p">,</span> <span class="n">is_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">=</span> <span class="n">card</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="n">is_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounded</span> <span class="o">=</span> <span class="n">bounded</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; (card: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;string&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Boolean</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A column with True/False data&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">is_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="n">is_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounded</span> <span class="o">=</span> <span class="n">bounded</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; (boolean)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;boolean&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">DateTime</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A date/time column&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">is_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="n">is_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounded</span> <span class="o">=</span> <span class="n">bounded</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; (datetime)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;datetime&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A column with integer data&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minval</span> <span class="o">=</span> <span class="n">minval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxval</span> <span class="o">=</span> <span class="n">maxval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="n">is_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unbounded</span> <span class="o">=</span> <span class="n">minval</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">maxval</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounded</span> <span class="o">=</span> <span class="n">bounded</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="s2">&quot;unbounded&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unbounded</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minval</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; [int] (&quot;</span> <span class="o">+</span> <span class="n">bounds</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;int&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A floating point column&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minval</span> <span class="o">=</span> <span class="n">minval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxval</span> <span class="o">=</span> <span class="n">maxval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="n">is_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unbounded</span> <span class="o">=</span> <span class="n">minval</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">maxval</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounded</span> <span class="o">=</span> <span class="n">bounded</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="s2">&quot;unbounded&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unbounded</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minval</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; [float] (&quot;</span> <span class="o">+</span> <span class="n">bounds</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;float&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Unknown</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Column is unknown type.  Will be ignored.  May not be used in queries.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_key</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; (unknown)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">typename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;unknown&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">CollectionYamlLoader</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">c_s</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">YAMLError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_metadata_object</span><span class="p">(</span><span class="n">c_s</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">c_s</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">YAMLError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_metadata_object</span><span class="p">(</span><span class="n">c_s</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_metadata_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_s</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">c_s</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No collections in YAML file!&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please include only one collection per config file: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># we have two keys; one should be engine</span>
+            <span class="k">if</span> <span class="s2">&quot;engine&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please include only one collection per config file: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+            <span class="n">engine</span> <span class="o">=</span> <span class="n">c_s</span><span class="p">[</span><span class="s2">&quot;engine&quot;</span><span class="p">]</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;engine&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="n">c_s</span><span class="p">[</span><span class="n">collection</span><span class="p">]</span>
+
+        <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">schema</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">table</span><span class="p">]</span>
+                <span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">CollectionMetadata</span><span class="p">(</span><span class="n">tables</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">rowcount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;rows&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;rows&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">rows_exact</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;rows_exact&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;rows_exact&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">row_privacy</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;row_privacy&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;row_privacy&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">max_ids</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;max_ids&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;max_ids&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">sample_max_ids</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;sample_max_ids&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;sample_max_ids&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="n">use_dpsu</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;use_dpsu&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;use_dpsu&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">clamp_counts</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;clamp_counts&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;clamp_counts&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="n">clamp_columns</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;clamp_columns&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;clamp_columns&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">True</span>
+        <span class="n">censor_dims</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;censor_dims&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;censor_dims&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">else</span> <span class="kc">True</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">cn</span>
+            <span class="k">for</span> <span class="n">cn</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cn</span>
+            <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="s2">&quot;rows&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;rows_exact&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;row_privacy&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;max_ids&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sample_max_ids&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;clamp_counts&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;clamp_columns&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;use_dpsu&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;censor_dims&quot;</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">colnames</span><span class="p">:</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_column</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">column</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span>
+            <span class="n">schema</span><span class="p">,</span>
+            <span class="n">table</span><span class="p">,</span>
+            <span class="n">columns</span><span class="p">,</span>
+            <span class="n">rowcount</span><span class="p">,</span>
+            <span class="n">rows_exact</span><span class="p">,</span>
+            <span class="n">row_privacy</span><span class="p">,</span>
+            <span class="n">max_ids</span><span class="p">,</span>
+            <span class="n">sample_max_ids</span><span class="p">,</span>
+            <span class="n">clamp_counts</span><span class="p">,</span>
+            <span class="n">clamp_columns</span><span class="p">,</span>
+            <span class="n">use_dpsu</span><span class="p">,</span>
+            <span class="n">censor_dims</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">is_key</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="s2">&quot;private_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="nb">bool</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;private_id&quot;</span><span class="p">])</span>
+        <span class="n">bounded</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="s2">&quot;bounded&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="nb">bool</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;bounded&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;boolean&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">is_key</span><span class="p">,</span> <span class="n">bounded</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;datetime&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DateTime</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">is_key</span><span class="p">,</span> <span class="n">bounded</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;int&quot;</span><span class="p">:</span>
+            <span class="n">minval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;lower&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;lower&quot;</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">maxval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;upper&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;upper&quot;</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">Int</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">is_key</span><span class="p">,</span> <span class="n">bounded</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+            <span class="n">minval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;lower&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;lower&quot;</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">maxval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;upper&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;upper&quot;</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">Float</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">is_key</span><span class="p">,</span> <span class="n">bounded</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">:</span>
+            <span class="n">card</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;cardinality&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;cardinality&quot;</span> <span class="ow">in</span> <span class="n">c</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="n">String</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">card</span><span class="p">,</span> <span class="n">is_key</span><span class="p">,</span> <span class="n">bounded</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown column type for column </span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_metadata</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">):</span>
+
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">collection_metadata</span><span class="o">.</span><span class="n">engine</span>
+        <span class="n">schemas</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">collection_metadata</span><span class="o">.</span><span class="n">tables</span><span class="p">():</span>
+            <span class="n">schema_name</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">schema</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="n">schema_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">schemas</span><span class="p">:</span>
+                <span class="n">schemas</span><span class="p">[</span><span class="n">schema_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">schema</span> <span class="o">=</span> <span class="n">schemas</span><span class="p">[</span><span class="n">schema_name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">table_name</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Attempt to insert table with same name twice: &quot;</span> <span class="o">+</span> <span class="n">schema_name</span> <span class="o">+</span> <span class="n">table_name</span>
+                <span class="p">)</span>
+            <span class="n">schema</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span>
+            <span class="n">table</span><span class="p">[</span><span class="s2">&quot;rows&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">rowcount</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">row_privacy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;row_privacy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">row_privacy</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">max_ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;max_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">max_ids</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">sample_max_ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;sample_max_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">sample_max_ids</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">rows_exact</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;rows_exact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">rows_exact</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">use_dpsu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;use_dpsu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">use_dpsu</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">clamp_counts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;clamp_counts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">clamp_counts</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">clamp_columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;clamp_columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">clamp_columns</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">censor_dims</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">table</span><span class="p">[</span><span class="s2">&quot;censor_dims&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">censor_dims</span>
+
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">():</span>
+                <span class="n">cname</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">if</span> <span class="n">cname</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;Duplicate column name </span><span class="si">{0}</span><span class="s2"> in table </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cname</span><span class="p">,</span> <span class="n">table_name</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="n">table</span><span class="p">[</span><span class="n">cname</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">column</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">cname</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;bounded&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">bounded</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;bounded&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">bounded</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;card&quot;</span><span class="p">):</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">card</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;minval&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">minval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;lower&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">minval</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">&quot;maxval&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">maxval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;upper&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">maxval</span>
+                <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">is_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">is_key</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;private_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">is_key</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">String</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Int</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Float</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;float&quot;</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Boolean</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;boolean&quot;</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DateTime</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;datetime&quot;</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Unknown</span><span class="p">:</span>
+                    <span class="n">column</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown column type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">db</span><span class="p">[</span><span class="n">collection_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">schemas</span>
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;engine&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collection_metadata</span><span class="o">.</span><span class="n">engine</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot save metadata to a file stream.  Please use file path&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

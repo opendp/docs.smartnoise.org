@@ -19,3 +19,6 @@ SmartNoise-SDK
         :maxdepth: 1
 
         opendp.smartnoise.sql
+        opendp.smartnoise.metadata
+        opendp.smartnoise.synthesizers
+        opendp.smartnoise.synthesizers.pytorch.nn
