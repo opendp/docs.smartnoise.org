@@ -3,7 +3,7 @@
 
 # OpenDP Documentation
 
-Note: The OpenDP documentation, [docs.opendp.org](docs.opendp.org), is currently under development.
+Note: The OpenDP documentation, [docs.opendp.org](https://docs.opendp.org), is currently under development.
 
 For users of SmartNoise, please visit: [docs.opendp.org/en/latest/smartnoise](https://docs.opendp.org/en/latest/smartnoise/)
 
