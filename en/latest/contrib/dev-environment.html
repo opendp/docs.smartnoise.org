@@ -276,11 +276,13 @@
 <h2><a class="toc-backref" href="#id4">Build OpenDP</a><a class="headerlink" href="#build-opendp" title="Permalink to this headline">¶</a></h2>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">rust</span></code> directory before attempting a build, run the tests, and then return to the <code class="docutils literal notranslate"><span class="pre">opendp</span></code> directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> rust
-cargo build
+cargo build --features<span class="o">=</span>python
 cargo <span class="nb">test</span>
 <span class="nb">cd</span> ..
 </pre></div>
 </div>
+<p>If you are on Windows, use <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--no-default-features</span> <span class="pre">--features=python</span></code>.
+Be aware that this also disables floating-point protections.</p>
 </section>
 <section id="install-python-dependencies">
 <h2><a class="toc-backref" href="#id5">Install Python Dependencies</a><a class="headerlink" href="#install-python-dependencies" title="Permalink to this headline">¶</a></h2>
