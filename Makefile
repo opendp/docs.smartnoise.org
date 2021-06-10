@@ -29,7 +29,7 @@ html:
 
 versions:
 	# "/en" is the default, but someday we might have translations
-	$(SPHINXMULTI) source $(BUILDDIR)/html/en
+	$(SPHINXMULTI) $(SPHINXOPTS) source $(BUILDDIR)/html/en
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 	cp redirect.html $(BUILDDIR)/html/index.html
