@@ -38,9 +38,12 @@ Change to the ``rust`` directory before attempting a build, run the tests, and t
 .. code-block:: bash
 
     cd rust
-    cargo build
+    cargo build --features=python
     cargo test
     cd ..
+
+If you are on Windows, use `cargo build --no-default-features --features=python`.
+Be aware that this also disables floating-point protections.
 
 Install Python Dependencies
 ---------------------------
