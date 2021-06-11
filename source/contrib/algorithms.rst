@@ -11,10 +11,6 @@ Write a Proof
 
 Proofs should be written in a markup language such as LaTeX that can be converted into a PDF and perhaps other formats.
 
-An example proof can be found at https://www.overleaf.com/read/brvrprjhrhwb
-
-Discussion about this proof can be found at https://github.com/opendp/opendp/pull/58
-
 Implement the Algorithm
 -----------------------
 
