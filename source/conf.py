@@ -73,6 +73,19 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, maps document names to template names.
 html_theme_options = {
+    "external_links": [
+        {
+            "name": "GitHub Discussions",
+            "url": "https://github.com/opendp/opendp/discussions"
+        },
+    ],
+    "icon_links": [
+        {
+            "name": "GitHub Discussions",
+            "url": "https://github.com/opendp/opendp/discussions",
+            "icon": "far fa-comments",
+        },
+    ],
     "github_url": "https://github.com/opendp"
 }
 

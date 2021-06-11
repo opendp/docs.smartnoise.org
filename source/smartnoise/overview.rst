@@ -107,3 +107,10 @@ To best way to get started with SmartNoise is by reviewing and trying examples f
 .. _SQL Data Access: https://github.com/opendp/smartnoise-samples/tree/master/data
 .. _Microsoft SmartNoise Differential Privacy Machine Learning Case Studies: https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/
 .. _SmartNoise Whitepaper Demo Notebooks: https://github.com/opendp/smartnoise-samples/tree/master/whitepaper-demos
+
+Getting Help
+------------
+
+If you have questions or feedback regarding SmartNoise, you are welcome to post to the `SmartNoise section`_ of GitHub Discussions.
+
+.. _Smartnoise section: https://github.com/opendp/opendp/discussions/categories/smartnoise

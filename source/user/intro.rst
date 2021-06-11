@@ -31,3 +31,10 @@ This guide is intended primarily for developers or data scientists who want to m
 Data scientists and others who are more interested in a graphical user interface should review the offerings in the :doc:`opendp-commons`.
 
 Potential contributors to OpenDP should read the :doc:`/contrib/index`.
+
+Getting Help
+------------
+
+If you have questions or feedback regarding OpenDP, please feel free to post on `GitHub Discussions`_.
+
+.. _GitHub Discussions: https://github.com/opendp/opendp/discussions

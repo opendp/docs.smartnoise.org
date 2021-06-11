@@ -28,7 +28,9 @@ Other projects in the :doc:`/user/opendp-commons` have their own issue trackers.
 Getting Help
 ------------
 
-To discuss your contribution with OpenDP developers, open an issue at https://github.com/opendp/opendp/issues
+To discuss your contribution with OpenDP developers, please start a thread on `GitHub Discussions`_.
+
+.. _GitHub Discussions: https://github.com/opendp/opendp/discussions
 
 Other OpenDP Projects
 ---------------------
