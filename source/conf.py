@@ -80,6 +80,7 @@ html_theme_options = {
             "icon": "far fa-comments",
         },
     ],
+    "twitter_url": "https://twitter.com/opendp_org",
     "github_url": "https://github.com/opendp"
 }
 
