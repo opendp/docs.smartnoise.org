@@ -24,3 +24,9 @@ Docs are deployed to http://docs.opendp.org using GitHub Actions.
 Note that `make html` is replaced with `make versions` to build multiple versions (branches, tags) using the [sphinx-multiversion][] extension.
 
 [sphinx-multiversion]: https://holzhaus.github.io/sphinx-multiversion/
+
+## Join the Discussion
+
+You are very welcome to join us on [GitHub Discussions][]!
+
+[GitHub Discussions]: https://github.com/opendp/opendp/discussions
