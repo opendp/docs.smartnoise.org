@@ -3,3 +3,6 @@ sphinx-multiversion
 pydata-sphinx-theme
 opendp-smartnoise-core
 opendp-smartnoise
+opacus
+torch
+ctgan==0.2.2.dev1

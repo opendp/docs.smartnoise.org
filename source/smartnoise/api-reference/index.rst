@@ -20,3 +20,5 @@ SmartNoise-SDK
 
         opendp.smartnoise.sql
         opendp.smartnoise.metadata
+        opendp.smartnoise.synthesizers
+        opendp.smartnoise.synthesizers.pytorch.nn
