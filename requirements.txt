@@ -5,4 +5,4 @@ opendp-smartnoise-core
 opendp-smartnoise
 opacus
 torch
-ctgan==0.2.2.dev1
+ctgan==0.2.2.dev0
