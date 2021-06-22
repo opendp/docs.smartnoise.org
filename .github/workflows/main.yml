@@ -6,8 +6,9 @@ on:
   push:
     branches:
       - latest
-      #- 17-sn-updates
-
+  pull_request:
+    branches:
+      - latest
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -30,7 +31,8 @@ jobs:
           python --version
           python -m venv venv
           source venv/bin/activate
-          pip install -r requirements.txt
+          pip install --upgrade setuptools
+          pip install --use-feature=2020-resolver -r requirements.txt
           make versions
           cp -r build /tmp
           git fetch
@@ -45,7 +47,7 @@ jobs:
       - name: Push docs to gh-pages branch
         run: |
           echo "Push docs to gh-pages branch"
-          git commit --allow-empty-message --message "$(git log $(git rev-parse origin/latest) --oneline --format=%B -n1 | head -n1)"
-          git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
-          git push --force origin gh-pages
+          #git commit --allow-empty-message --message "$(git log $(git rev-parse origin/latest) --oneline --format=%B -n1 | head -n1)"
+          #git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
+          #git push --force origin gh-pages
         continue-on-error: true
