@@ -31,11 +31,10 @@ jobs:
           python --version
           python -m venv venv
           source venv/bin/activate
-          pip --version   # version check
+          echo "Upgrade pip and install requirements."
           python -m pip install --upgrade pip
-          pip --version   # version check
-          pip install --upgrade setuptools
-          pip install --use-feature=2020-resolver -r requirements.txt
+          pip install -r requirements.txt
+          echo "Create docs."
           make versions
           cp -r build /tmp
           git fetch
