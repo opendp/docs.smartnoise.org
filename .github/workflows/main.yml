@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - latest
-      #- 17-sn-updates
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -30,7 +28,10 @@ jobs:
           python --version
           python -m venv venv
           source venv/bin/activate
+          echo "Upgrade pip and install requirements."
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
+          echo "Create docs."
           make versions
           cp -r build /tmp
           git fetch
