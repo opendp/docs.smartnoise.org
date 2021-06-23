@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Development Environment &#8212; OpenDP</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -260,7 +259,7 @@
               
               <div>
                 
-  <section id="development-environment">
+  <div class="section" id="development-environment">
 <h1>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h1>
 <p>Follow the steps below to get an OpenDP development environment set up, including the ability to run tests in both Rust and Python.</p>
 <div class="contents local topic" id="contents">
@@ -274,23 +273,23 @@
 <li><p><a class="reference internal" href="#run-the-tests" id="id6">Run the Tests</a></p></li>
 </ul>
 </div>
-<section id="install-rust">
+<div class="section" id="install-rust">
 <h2><a class="toc-backref" href="#id1">Install Rust</a><a class="headerlink" href="#install-rust" title="Permalink to this headline">¶</a></h2>
 <p>Download Rust from the <a class="reference external" href="https://www.rust-lang.org">Rust website</a>.</p>
-</section>
-<section id="install-python">
+</div>
+<div class="section" id="install-python">
 <h2><a class="toc-backref" href="#id2">Install Python</a><a class="headerlink" href="#install-python" title="Permalink to this headline">¶</a></h2>
 <p>Download Python from the <a class="reference external" href="https://www.python.org">Python website</a>.</p>
-</section>
-<section id="clone-the-opendp-repo">
+</div>
+<div class="section" id="clone-the-opendp-repo">
 <h2><a class="toc-backref" href="#id3">Clone the OpenDP Repo</a><a class="headerlink" href="#clone-the-opendp-repo" title="Permalink to this headline">¶</a></h2>
 <p>Clone the repo and change into the <code class="docutils literal notranslate"><span class="pre">opendp</span></code> directory that’s created.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/opendp/opendp.git
 <span class="nb">cd</span> opendp
 </pre></div>
 </div>
-</section>
-<section id="build-opendp">
+</div>
+<div class="section" id="build-opendp">
 <h2><a class="toc-backref" href="#id4">Build OpenDP</a><a class="headerlink" href="#build-opendp" title="Permalink to this headline">¶</a></h2>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">rust</span></code> directory before attempting a build, run the tests, and then return to the <code class="docutils literal notranslate"><span class="pre">opendp</span></code> directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> rust
@@ -301,8 +300,8 @@ cargo <span class="nb">test</span>
 </div>
 <p>If you are on Windows, use <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--no-default-features</span> <span class="pre">--features=python</span></code>.
 Be aware that this also disables floating-point protections.</p>
-</section>
-<section id="install-python-dependencies">
+</div>
+<div class="section" id="install-python-dependencies">
 <h2><a class="toc-backref" href="#id5">Install Python Dependencies</a><a class="headerlink" href="#install-python-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Change to the <code class="docutils literal notranslate"><span class="pre">python</span></code> directory, create a Python virtual environment, activate it, install dependencies, and then install the Python OpenDP library itself.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> python
@@ -313,16 +312,16 @@ mkdir src/opendp/lib
 pip install -e .
 </pre></div>
 </div>
-</section>
-<section id="run-the-tests">
+</div>
+<div class="section" id="run-the-tests">
 <h2><a class="toc-backref" href="#id6">Run the Tests</a><a class="headerlink" href="#run-the-tests" title="Permalink to this headline">¶</a></h2>
 <p>From the <code class="docutils literal notranslate"><span class="pre">python</span></code> directory, set an environment variable to the location of the OpenDP library you built. Then run the tests.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">OPENDP_LIB_DIR</span><span class="o">=</span>../rust/target/debug
 pytest -v
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
               </div>

@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartNoise Overview &#8212; OpenDP</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -193,6 +192,16 @@
      opendp.smartnoise.metadata package
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="api-reference/opendp.smartnoise.synthesizers.html">
+     opendp.smartnoise.synthesizers package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html">
+     opendp.smartnoise.synthesizers.pytorch.nn package
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -262,7 +271,7 @@
               
               <div>
                 
-  <section id="smartnoise-overview">
+  <div class="section" id="smartnoise-overview">
 <h1>SmartNoise Overview<a class="headerlink" href="#smartnoise-overview" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="toctitle">
 <p class="topic-title">Contents:</p>
@@ -273,7 +282,7 @@
 <li><p><a class="reference internal" href="#getting-help" id="id5">Getting Help</a></p></li>
 </ul>
 </div>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><a class="img-responsive reference internal" href="../_images/example_education.png"><img alt="smartnoise-fig-education" class="img-responsive" src="../_images/example_education.png" style="width: 20%;" /></a> <a class="img-responsive reference internal" href="../_images/example_simulations.png"><img alt="smartnoise-fig-simulations" class="img-responsive" src="../_images/example_simulations.png" style="width: 20%;" /></a> <a class="img-responsive reference internal" href="../_images/example_size.png"><img alt="smartnoise-fig-size" class="img-responsive" src="../_images/example_size.png" style="width: 20%;" /></a> <a class="img-responsive reference internal" href="../_images/example_utility.png"><img alt="smartnoise-fig-utility" class="img-responsive" src="../_images/example_utility.png" style="width: 20%;" /></a></p>
 <p>Differential privacy is the gold standard definition of privacy protection. The SmartNoise project endeavors to connect theoretical solutions from the academic community with the practical lessons learned from real-world deployments, to make differential privacy broadly accessible to future deployments. Specifically, we provide to people involved with sensitive data the following building blocks with implementations based on vetted and mature differential privacy research:</p>
@@ -291,8 +300,8 @@
 <p>The mechanisms library provides a fast, memory-safe native runtime for validating and running differentially private analyses.</p>
 <p>Differentially private computations are specified as an analysis graph that can be validated and executed to produce differentially private releases of data. Releases include metadata about accuracy of outputs and the complete privacy cost of the analysis.</p>
 <p>We recommend reading the <a class="reference external" href="https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/">Microsoft SmartNoise Differential Privacy Machine Learning Case Studies</a> which further describes applications of differentially privacy using SmartNoise.</p>
-</section>
-<section id="smartnoise-repositories">
+</div>
+<div class="section" id="smartnoise-repositories">
 <h2><a class="toc-backref" href="#id3">SmartNoise Repositories</a><a class="headerlink" href="#smartnoise-repositories" title="Permalink to this headline">¶</a></h2>
 <p>The SmartNoise mechanisms as well as the validator and runtime are written in Rust to take advantage of this language’s memory safety. In practice, SmartNoise users work with the <a class="reference external" href="https://pypi.org/project/opendp-smartnoise/">SmartNoise Python package</a> which includes the core Rust functionality as well as an SDK.</p>
 <p>The diagram below shows how the SmartNoise GitHub repositories interconnect.</p>
@@ -303,8 +312,8 @@
 <li><p><a class="reference external" href="https://github.com/opendp/smartnoise-sdk">smartnoise-sdk</a> - The SDK includes tools built upon the Python bindings.</p></li>
 </ol>
 <p>In addition the <a class="reference external" href="https://github.com/opendp/smartnoise-samples">smartnoise-samples</a> repository includes a set of exemplar notebooks which range from demonstrating basic functionality and utility to showing how to create a synthetic dataset with high utility for machine learning.</p>
-</section>
-<section id="quickstart-and-notebooks">
+</div>
+<div class="section" id="quickstart-and-notebooks">
 <h2><a class="toc-backref" href="#id4">Quickstart and Notebooks</a><a class="headerlink" href="#quickstart-and-notebooks" title="Permalink to this headline">¶</a></h2>
 <p>In practice, full SmartNoise functionality is available through a single <a class="reference external" href="https://pypi.org/project/opendp-smartnoise/">Python package</a> which is compatible with Python 3.6 to 3.8:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">opendp</span><span class="o">-</span><span class="n">smartnoise</span>
@@ -318,12 +327,12 @@
 <li><p><a class="reference external" href="https://github.com/opendp/smartnoise-samples/tree/master/data">SQL Data Access</a> - Code examples and notebooks show how to issue SQL queries against CSV files, database engines, and Spark clusters.</p></li>
 <li><p><a class="reference external" href="https://github.com/opendp/smartnoise-samples/tree/master/whitepaper-demos">SmartNoise Whitepaper Demo Notebooks</a> - Based on the whitepaper titled <a class="reference external" href="https://azure.microsoft.com/en-us/resources/microsoft-smartnoisedifferential-privacy-machine-learning-case-studies/">Microsoft SmartNoise Differential Privacy Machine Learning Case Studies</a> these notebooks include a demonstration of how to perform supervised machine learning with differential privacy and an example of creating a synthetic dataset with high utility for machine learning as well as examples of creating DP releases with histograms and protecting against a reidentification attack.</p></li>
 </ul>
-</section>
-<section id="getting-help">
+</div>
+<div class="section" id="getting-help">
 <h2><a class="toc-backref" href="#id5">Getting Help</a><a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
 <p>If you have questions or feedback regarding SmartNoise, you are welcome to post to the <a class="reference external" href="https://github.com/opendp/opendp/discussions/categories/smartnoise">SmartNoise section</a> of GitHub Discussions.</p>
-</section>
-</section>
+</div>
+</div>
 
 
               </div>

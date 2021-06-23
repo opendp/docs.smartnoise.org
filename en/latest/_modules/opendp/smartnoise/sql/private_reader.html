@@ -201,7 +201,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">reader</span><span class="p">,</span>
         <span class="n">metadata</span><span class="p">,</span>
-        <span class="n">epsilon_per_column</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">epsilon_per_column</span><span class="p">,</span>
         <span class="n">delta</span><span class="o">=</span><span class="mf">10e-16</span><span class="p">,</span>
         <span class="n">interval_widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -330,7 +330,7 @@
             <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="p">,</span> <span class="n">PandasReader</span><span class="p">)</span>
         <span class="p">):</span>
             <span class="n">query</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">query_ast</span><span class="p">)</span>
-            <span class="n">dpsu_df</span> <span class="o">=</span> <span class="n">run_dpsu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">dpsu_df</span> <span class="o">=</span> <span class="n">run_dpsu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">PandasReader</span><span class="p">(</span><span class="n">dpsu_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span>
@@ -395,15 +395,10 @@
             <span class="p">)</span>
 
         <span class="n">kc_pos</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">kcc_pos</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">syms</span><span class="p">)):</span>
             <span class="n">sname</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="n">syms</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">sname</span> <span class="o">==</span> <span class="s2">&quot;keycount&quot;</span><span class="p">:</span>
                 <span class="n">kc_pos</span> <span class="o">=</span> <span class="n">idx</span>
-            <span class="k">elif</span> <span class="n">sym</span><span class="o">.</span><span class="n">is_key_count</span><span class="p">:</span>
-                <span class="n">kcc_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">kc_pos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">kcc_pos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">kc_pos</span> <span class="o">=</span> <span class="n">kcc_pos</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
         <span class="c1"># make a list of mechanisms in column order</span>
         <span class="n">mechs</span> <span class="o">=</span> <span class="p">[</span>
@@ -445,9 +440,6 @@
                 <span class="n">noise</span><span class="o">.</span><span class="n">release</span><span class="p">([</span><span class="n">v</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">noise</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">v</span>
                 <span class="k">for</span> <span class="n">noise</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mechs</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
             <span class="p">]</span>
-            <span class="c1"># ensure all key counts are the same</span>
-            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">kcc_pos</span><span class="p">:</span>
-                <span class="n">out_row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">out_row</span><span class="p">[</span><span class="n">kc_pos</span><span class="p">]</span>
             <span class="c1"># clamp counts to be non-negative</span>
             <span class="k">if</span> <span class="n">clamp_counts</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
@@ -465,6 +457,8 @@
             <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">process_row</span><span class="p">,</span> <span class="n">db_rs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
         <span class="k">if</span> <span class="n">subquery</span><span class="o">.</span><span class="n">agg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">censor_dims</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">kc_pos</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Query needs a key count column to censor dimensions&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;filter&quot;</span><span class="p">):</span>
                 <span class="c1"># it&#39;s an RDD</span>
                 <span class="n">tau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span>
