@@ -7,6 +7,6 @@ Documentation
 Contributing Documentation
 --------------------------
 
-The source for this documentation can be found at https://github.com/opendp/opendp-documentation
+The source for this documentation can be found at https://github.com/opendp/docs.smartnoise.org
 
 The docs are built using Sphinx and the steps are listed in the README.
