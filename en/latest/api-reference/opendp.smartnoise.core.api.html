@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opendp.smartnoise.core.api package &#8212; SmartNoise</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="opendp.smartnoise.core.base package" href="opendp.smartnoise.core.base.html" />
+    <link rel="prev" title="SmartNoise API Reference" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/smartnoise-logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../overview.html">
+  SmartNoise Overview
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  SmartNoise API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../contact/index.html">
+  Contact
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
+            <span><i class="far fa-comments"></i></span>
+            <label class="sr-only">GitHub Discussions</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   opendp.smartnoise.core.api package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.base.html">
+   opendp.smartnoise.core.base package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.components.html">
+   opendp.smartnoise.core.components package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.value.html">
+   opendp.smartnoise.core.value package
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.sql.html">
+   opendp.smartnoise.sql package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.metadata.html">
+   opendp.smartnoise.metadata package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.html">
+   opendp.smartnoise.synthesizers package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.pytorch.nn.html">
+   opendp.smartnoise.synthesizers.pytorch.nn package
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+<h6>Branches</h6>
+<ul>
+  <li><a href="opendp.smartnoise.core.api.html">latest</a></li>
+</ul>
+
+
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-opendp.smartnoise.core.api">
+<span id="opendp-smartnoise-core-api-package"></span><h1>opendp.smartnoise.core.api package<a class="headerlink" href="#module-opendp.smartnoise.core.api" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.api.</span></code><code class="sig-name descname"><span class="pre">LibraryWrapper</span></code><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.accuracy_to_privacy_usage">
+<code class="sig-name descname"><span class="pre">accuracy_to_privacy_usage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privacy_definition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_arguments</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.accuracy_to_privacy_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.accuracy_to_privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Estimate the privacy usage necessary to bound accuracy to a given value.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>privacy_definition</strong> – A descriptive object defining neighboring, distance definitions</p></li>
+<li><p><strong>component</strong> – The component to compute accuracy for</p></li>
+<li><p><strong>properties</strong> – Properties about all of the arguments to the component</p></li>
+<li><p><strong>accuracies</strong> – A value and alpha to convert to privacy usage for each column</p></li>
+<li><p><strong>public_arguments</strong> – Public inputs to the component (like lower/upper for snapping)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A privacy usage response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.analytic_gaussian_mechanism">
+<code class="sig-name descname"><span class="pre">analytic_gaussian_mechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_constant_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.analytic_gaussian_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.analytic_gaussian_mechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct api to access the analytic gaussian mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – float scalar to privatize</p></li>
+<li><p><strong>epsilon</strong> – float privacy parameter</p></li>
+<li><p><strong>delta</strong> – float privacy parameter</p></li>
+<li><p><strong>sensitivity</strong> – float L2 sensitivity</p></li>
+<li><p><strong>enforce_constant_time</strong> – ensure all calls take the same elapsed time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>privatized float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.compute_privacy_usage">
+<code class="sig-name descname"><span class="pre">compute_privacy_usage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.compute_privacy_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.compute_privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Compute the overall privacy usage of an analysis.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analysis</strong> – A description of computation</p></li>
+<li><p><strong>release</strong> – A collection of public values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A privacy usage response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.compute_release">
+<code class="sig-name descname"><span class="pre">compute_release</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_trace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.compute_release"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.compute_release" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Evaluate an analysis and release the differentially private results.
+This function touches private data. It calls the runtime rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analysis</strong> – A description of computation</p></li>
+<li><p><strong>release</strong> – A collection of public values</p></li>
+<li><p><strong>stack_trace</strong> – Set to False to suppress stack traces</p></li>
+<li><p><strong>filter_level</strong> – Configures how much data should be included in the release</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A response containing an updated release</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.gaussian_mechanism">
+<code class="sig-name descname"><span class="pre">gaussian_mechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_constant_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.gaussian_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.gaussian_mechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct api to access the gaussian mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – float scalar to privatize</p></li>
+<li><p><strong>epsilon</strong> – float privacy parameter</p></li>
+<li><p><strong>delta</strong> – float privacy parameter</p></li>
+<li><p><strong>sensitivity</strong> – float L2 sensitivity</p></li>
+<li><p><strong>enforce_constant_time</strong> – ensure all calls take the same elapsed time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>privatized float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.generate_report">
+<code class="sig-name descname"><span class="pre">generate_report</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.generate_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Generate a json string with a summary/report of the Analysis and Release
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analysis</strong> – A description of computation</p></li>
+<li><p><strong>release</strong> – A collection of public values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A protobuf response containing a json summary string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.get_properties">
+<code class="sig-name descname"><span class="pre">get_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.get_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Derive static properties for all components in the graph.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analysis</strong> – A description of computation</p></li>
+<li><p><strong>release</strong> – A collection of public values</p></li>
+<li><p><strong>node_ids</strong> – An optional list of node ids to derive properties for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of property sets, one set of properties per component</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.laplace_mechanism">
+<code class="sig-name descname"><span class="pre">laplace_mechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_constant_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.laplace_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.laplace_mechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct api to access the laplace mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – float scalar to privatize</p></li>
+<li><p><strong>epsilon</strong> – float privacy parameter</p></li>
+<li><p><strong>sensitivity</strong> – float L1 sensitivity</p></li>
+<li><p><strong>enforce_constant_time</strong> – ensure all calls take the same elapsed time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>privatized float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.privacy_usage_to_accuracy">
+<code class="sig-name descname"><span class="pre">privacy_usage_to_accuracy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privacy_definition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.privacy_usage_to_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.privacy_usage_to_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Estimate the accuracy of the release of a component, based on a privacy usage.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>privacy_definition</strong> – A descriptive object defining neighboring, distance definitions</p></li>
+<li><p><strong>component</strong> – The component to compute accuracy for</p></li>
+<li><p><strong>properties</strong> – Properties about all of the arguments to the component</p></li>
+<li><p><strong>public_arguments</strong> – Public inputs to the component (like lower/upper for snapping)</p></li>
+<li><p><strong>alpha</strong> – Used to set the confidence level for the accuracy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accuracy estimates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.simple_geometric_mechanism">
+<code class="sig-name descname"><span class="pre">simple_geometric_mechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_constant_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.simple_geometric_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.simple_geometric_mechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct api to access the simple geometric mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – integer scalar to privatize</p></li>
+<li><p><strong>epsilon</strong> – float privacy parameter</p></li>
+<li><p><strong>sensitivity</strong> – float L1 sensitivity</p></li>
+<li><p><strong>min</strong> – lower bound on the statistic</p></li>
+<li><p><strong>max</strong> – upper bound on the statistic</p></li>
+<li><p><strong>enforce_constant_time</strong> – ensure all calls take the same elapsed time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>privatized integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.snapping_mechanism">
+<code class="sig-name descname"><span class="pre">snapping_mechanism</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_constant_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binding_probability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.snapping_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.snapping_mechanism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct api to access the snapping mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – float scalar to privatize</p></li>
+<li><p><strong>epsilon</strong> – float privacy parameter</p></li>
+<li><p><strong>sensitivity</strong> – float L1 sensitivity</p></li>
+<li><p><strong>min</strong> – lower bound on the statistic</p></li>
+<li><p><strong>max</strong> – upper bound on the statistic</p></li>
+<li><p><strong>enforce_constant_time</strong> – ensure all calls take the same elapsed time</p></li>
+<li><p><strong>binding_probability</strong> – optional float to scale clamping bounds based on the probability of the clamp binding</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>privatized float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.api.LibraryWrapper.validate_analysis">
+<code class="sig-name descname"><span class="pre">validate_analysis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#LibraryWrapper.validate_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.LibraryWrapper.validate_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Check if an analysis is differentially private, given a set of released values.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>analysis</strong> – A description of computation</p></li>
+<li><p><strong>release</strong> – A collection of public values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A success or failure response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.api.format_error">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.api.</span></code><code class="sig-name descname"><span class="pre">format_error</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/api.html#format_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.api.format_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">SmartNoise API Reference</a>
+    <a class='right-next' id="next-link" href="opendp.smartnoise.core.base.html" title="next page">opendp.smartnoise.core.base package</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

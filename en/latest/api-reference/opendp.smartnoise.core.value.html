@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opendp.smartnoise.core.value package &#8212; SmartNoise</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="opendp.smartnoise.sql package" href="opendp.smartnoise.sql.html" />
+    <link rel="prev" title="opendp.smartnoise.core.components package" href="opendp.smartnoise.core.components.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/smartnoise-logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../overview.html">
+  SmartNoise Overview
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  SmartNoise API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../contact/index.html">
+  Contact
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
+            <span><i class="far fa-comments"></i></span>
+            <label class="sr-only">GitHub Discussions</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.api.html">
+   opendp.smartnoise.core.api package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.base.html">
+   opendp.smartnoise.core.base package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.components.html">
+   opendp.smartnoise.core.components package
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   opendp.smartnoise.core.value package
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.sql.html">
+   opendp.smartnoise.sql package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.metadata.html">
+   opendp.smartnoise.metadata package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.html">
+   opendp.smartnoise.synthesizers package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.pytorch.nn.html">
+   opendp.smartnoise.synthesizers.pytorch.nn package
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+<h6>Branches</h6>
+<ul>
+  <li><a href="opendp.smartnoise.core.value.html">latest</a></li>
+</ul>
+
+
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-opendp.smartnoise.core.value">
+<span id="opendp-smartnoise-core-value-package"></span><h1>opendp.smartnoise.core.value package<a class="headerlink" href="#module-opendp.smartnoise.core.value" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.detect_atomic_type">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">detect_atomic_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#detect_atomic_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.detect_atomic_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_array">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_array</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_array1d">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_array1d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_array1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_array1d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_array1d_null">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_array1d_null</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_array1d_null"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_array1d_null" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_dataframe">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_index_key">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_index_key</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_index_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_index_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_jagged">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_jagged</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_jagged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_jagged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_partitions">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_partitions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_partitions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_privacy_usage">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_privacy_usage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">value_pb2.PrivacyUsage</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_privacy_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a json object representing privacy usage from a proto object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>usage</strong> – protobuf message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json privacy usage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_release">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_release</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_release"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_release" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.parse_value">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">parse_value</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#parse_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.parse_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_analysis">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_analysis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_argument_properties">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_argument_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_argument_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_argument_properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_array1d">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_array1d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_array1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_array1d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_component">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_component</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_component" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_dataframe">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_filter_level">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_filter_level</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_filter_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_filter_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_index_key">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_index_key</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_index_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_index_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_indexmap_release_node">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_indexmap_release_node</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_indexmap_release_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_indexmap_release_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_partitions">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_partitions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_partitions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_privacy_definition">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_privacy_definition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_privacy_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_privacy_definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_privacy_usage">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_privacy_usage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usage</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_privacy_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a protobuf object representing privacy usage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>usage</strong> – either a dict {‘epsilon’: float, ‘delta’: float} or PrivacyUsage. May also be contained in a list.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[PrivacyUsage]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_release">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_release</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_release"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_release" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_release_node">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_release_node</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_release_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_release_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="opendp.smartnoise.core.value.serialize_value">
+<code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.value.</span></code><code class="sig-name descname"><span class="pre">serialize_value</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/value.html#serialize_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.value.serialize_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="opendp.smartnoise.core.components.html" title="previous page">opendp.smartnoise.core.components package</a>
+    <a class='right-next' id="next-link" href="opendp.smartnoise.sql.html" title="next page">opendp.smartnoise.sql package</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

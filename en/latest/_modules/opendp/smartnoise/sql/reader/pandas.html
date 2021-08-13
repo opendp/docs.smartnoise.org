@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>opendp.smartnoise.sql.reader.pandas &#8212; OpenDP</title>
+    <title>opendp.smartnoise.sql.reader.pandas &#8212; SmartNoise</title>
     
   <link href="../../../../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
     
 
 <a class="navbar-brand" href="../../../../../index.html">
-  <img src="../../../../../_static/opendp-logo.png" class="logo" alt="logo">
+  <img src="../../../../../_static/smartnoise-logo.svg" class="logo" alt="logo">
 </a>
 
 
@@ -68,26 +68,14 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../quickstart/index.html">
-  Quickstart
+ <a class="reference internal nav-link" href="../../../../../overview.html">
+  SmartNoise Overview
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../user/index.html">
-  User Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../contrib/index.html">
-  Contributor Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../smartnoise/index.html">
-  SmartNoise
+ <a class="reference internal nav-link" href="../../../../../api-reference/index.html">
+  SmartNoise API Reference
  </a>
 </li>
 
@@ -108,19 +96,7 @@
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/opendp_org" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp/opendp/discussions" rel="noopener" target="_blank" title="GitHub Discussions">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
             <span><i class="far fa-comments"></i></span>
             <label class="sr-only">GitHub Discussions</label>
           </a>
@@ -180,7 +156,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 
 
-<div class="viewcode-block" id="PandasReader"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader">[docs]</a><span class="k">class</span> <span class="nc">PandasReader</span><span class="p">(</span><span class="n">SqlReader</span><span class="p">):</span>
+<div class="viewcode-block" id="PandasReader"><a class="viewcode-back" href="../../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader">[docs]</a><span class="k">class</span> <span class="nc">PandasReader</span><span class="p">(</span><span class="n">SqlReader</span><span class="p">):</span>
     <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Engine</span><span class="o">.</span><span class="n">PANDAS</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -280,7 +256,7 @@
                 <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">column_form</span><span class="p">,</span> <span class="n">sanitized_column</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">query</span>
 
-<div class="viewcode-block" id="PandasReader.db_name"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader.db_name">[docs]</a>    <span class="k">def</span> <span class="nf">db_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PandasReader.db_name"><a class="viewcode-back" href="../../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader.db_name">[docs]</a>    <span class="k">def</span> <span class="nf">db_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Get the database associated with this connection</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -288,7 +264,7 @@
         <span class="n">dbname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">dbname</span></div>
 
-<div class="viewcode-block" id="PandasReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PandasReader.execute"><a class="viewcode-back" href="../../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PandasReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Executes a raw SQL string against the database and returns</span>
 <span class="sd">            tuples for rows.  This will NOT fix the query to target the</span>

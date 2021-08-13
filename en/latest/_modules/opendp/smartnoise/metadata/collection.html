@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>opendp.smartnoise.metadata.collection &#8212; OpenDP</title>
+    <title>opendp.smartnoise.metadata.collection &#8212; SmartNoise</title>
     
   <link href="../../../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
     
 
 <a class="navbar-brand" href="../../../../index.html">
-  <img src="../../../../_static/opendp-logo.png" class="logo" alt="logo">
+  <img src="../../../../_static/smartnoise-logo.svg" class="logo" alt="logo">
 </a>
 
 
@@ -68,26 +68,14 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../quickstart/index.html">
-  Quickstart
+ <a class="reference internal nav-link" href="../../../../overview.html">
+  SmartNoise Overview
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../user/index.html">
-  User Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../contrib/index.html">
-  Contributor Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../smartnoise/index.html">
-  SmartNoise
+ <a class="reference internal nav-link" href="../../../../api-reference/index.html">
+  SmartNoise API Reference
  </a>
 </li>
 
@@ -108,19 +96,7 @@
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/opendp_org" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp/opendp/discussions" rel="noopener" target="_blank" title="GitHub Discussions">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
             <span><i class="far fa-comments"></i></span>
             <label class="sr-only">GitHub Discussions</label>
           </a>
@@ -182,7 +158,7 @@
 <span class="c1"># implements spec at https://docs.google.com/document/d/1Q4lUKyEu2W9qQKq6A0dbo0dohgSUxitbdGhX97sUNOM/</span>
 
 
-<div class="viewcode-block" id="CollectionMetadata"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata">[docs]</a><span class="k">class</span> <span class="nc">CollectionMetadata</span><span class="p">:</span>
+<div class="viewcode-block" id="CollectionMetadata"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata">[docs]</a><span class="k">class</span> <span class="nc">CollectionMetadata</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Information about a collection of tabular data sources&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -213,25 +189,25 @@
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
 
-<div class="viewcode-block" id="CollectionMetadata.tables"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.tables">[docs]</a>    <span class="k">def</span> <span class="nf">tables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CollectionMetadata.tables"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.tables">[docs]</a>    <span class="k">def</span> <span class="nf">tables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span> <span class="k">for</span> <span class="n">tname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_tables</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span></div>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">()</span>
 
-<div class="viewcode-block" id="CollectionMetadata.from_file"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_file">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CollectionMetadata.from_file"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_file">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the metadata about this collection from a YAML file&quot;&quot;&quot;</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ys</span><span class="o">.</span><span class="n">read_file</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CollectionMetadata.from_dict"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="CollectionMetadata.from_dict"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_dict">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the metadata from a dict object&quot;&quot;&quot;</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ys</span><span class="o">.</span><span class="n">_create_metadata_object</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CollectionMetadata.from_"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_">[docs]</a>    <span class="nd">@classmethod</span> 
+<div class="viewcode-block" id="CollectionMetadata.from_"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_">[docs]</a>    <span class="nd">@classmethod</span> 
     <span class="k">def</span> <span class="nf">from_</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">CollectionMetadata</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">val</span>
@@ -246,7 +222,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metadata needs to be string, dictionary, or CollectionMetadata.  Got </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CollectionMetadata.to_file"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.to_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">):</span>
+<div class="viewcode-block" id="CollectionMetadata.to_file"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.to_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save collection metadata to a YAML file&quot;&quot;&quot;</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="n">ys</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">)</span></div></div>

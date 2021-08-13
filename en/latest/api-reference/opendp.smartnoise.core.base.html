@@ -1,0 +1,604 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opendp.smartnoise.core.base package &#8212; SmartNoise</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="opendp.smartnoise.core.components package" href="opendp.smartnoise.core.components.html" />
+    <link rel="prev" title="opendp.smartnoise.core.api package" href="opendp.smartnoise.core.api.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/smartnoise-logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../overview.html">
+  SmartNoise Overview
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  SmartNoise API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../contact/index.html">
+  Contact
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
+            <span><i class="far fa-comments"></i></span>
+            <label class="sr-only">GitHub Discussions</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.api.html">
+   opendp.smartnoise.core.api package
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   opendp.smartnoise.core.base package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.components.html">
+   opendp.smartnoise.core.components package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.core.value.html">
+   opendp.smartnoise.core.value package
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.sql.html">
+   opendp.smartnoise.sql package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.metadata.html">
+   opendp.smartnoise.metadata package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.html">
+   opendp.smartnoise.synthesizers package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opendp.smartnoise.synthesizers.pytorch.nn.html">
+   opendp.smartnoise.synthesizers.pytorch.nn package
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+<h6>Branches</h6>
+<ul>
+  <li><a href="opendp.smartnoise.core.base.html">latest</a></li>
+</ul>
+
+
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-opendp.smartnoise.core.base">
+<span id="opendp-smartnoise-core-base-package"></span><h1>opendp.smartnoise.core.base package<a class="headerlink" href="#module-opendp.smartnoise.core.base" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="opendp.smartnoise.core.base.Analysis">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.base.</span></code><code class="sig-name descname"><span class="pre">Analysis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighboring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'substitute'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'public'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protect_floating_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protect_elapsed_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protect_sensitivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_traces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_parameter_checks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Top-level class that contains a definition of privacy and collection of statistics.
+This class tracks cumulative privacy usage for all components within.</p>
+<p>The dynamic flag makes the library easier to use, because multiple batches may be strung together before calling release().
+However, it opens the execution up to potential side channel timing attacks. Disable this if side channels are a concern.</p>
+<p>The eager flag makes the library easier to debug, because stack traces pass through malformed components.
+As a library user, it may be useful to enable eager and find a small, similar public dataset to help shape your analysis.
+Building an analysis with a large dataset and eager enabled is not recommended, because the analysis is re-executed for each additional node.</p>
+<p><cite>filter_level</cite> determines what data is included in the release:</p>
+<ul class="simple">
+<li><p><cite>public</cite> only newly released public data is included in the release</p></li>
+<li><p><cite>public_and_prior</cite> will also retain private values previously included in the release</p></li>
+<li><p><cite>all</cite> for including all evaluations from all nodes, which is useful for system debugging</p></li>
+</ul>
+<p>There are several arguments for enabling/disabling individual protections.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><cite>protect_floating_point</cite> (enabled by default):</dt><dd><ul>
+<li><p>if enabled, disables the runtime if the runtime was not compiled against mpfr</p></li>
+<li><p>if enabled, prevents the usage of the laplace and gaussian mechanisms</p></li>
+<li><p>if enabled, noise-addition statistics on floating point numbers default to the snapping mechanism</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>protect_sensitivity</cite> (enabled by default):</dt><dd><ul>
+<li><p>if enabled, users may not pass custom sensitivities to mechanisms</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>protect_elapsed_time</cite> (disabled by default):</dt><dd><ul>
+<li><p>if enabled, forces all computations to run in constant time, regardless of the private dataset</p></li>
+<li><p>WARNING: this feature is still in development. Some components (like resize) may still have different execution times on neighboring datasets.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>strict_parameter_checks</cite> (enabled by default):</dt><dd><ul>
+<li><p>if enabled, analyses may not consume more then epsilon=1, or delta greater than a value proportional to the number of records</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>stack_traces</cite> (enabled by default):</dt><dd><ul>
+<li><p>Disable stack traces to limit the amount of private information leaked should an error be encountered.</p></li>
+<li><p>This only turns off stack traces from the runtime- the rest of the library is not affected.</p></li>
+<li><p>The library does not take epsilon consumed from errors into account</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dynamic</strong> – flag for enabling dynamic validation</p></li>
+<li><p><strong>eager</strong> – release every time a component is added</p></li>
+<li><p><strong>neighboring</strong> – may be <cite>substitute</cite> or <cite>add_remove</cite></p></li>
+<li><p><strong>group_size</strong> – number of individuals to protect simultaneously</p></li>
+<li><p><strong>filter_level</strong> – may be <cite>public</cite>, <cite>public_and_prior</cite> or <cite>all</cite></p></li>
+<li><p><strong>protect_floating_point</strong> – enable for protection against floating point attacks</p></li>
+<li><p><strong>protect_elapsed_time</strong> – enable for protection against side-channel timing attacks</p></li>
+<li><p><strong>protect_sensitivity</strong> – disable to pass custom sensitivities</p></li>
+<li><p><strong>stack_traces</strong> – set to False to suppress potentially sensitive stack traces</p></li>
+<li><p><strong>strict_parameter_checks</strong> – enable this to fail when some soft privacy violations are detected</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.add_component">
+<code class="sig-name descname"><span class="pre">add_component</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.add_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.add_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Every component must be contained in an analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>component</strong> – The description of computation</p></li>
+<li><p><strong>value</strong> – Optionally, the result of the computation.</p></li>
+<li><p><strong>value_format</strong> – Optionally, the format of the result of the computation- <cite>array</cite> <cite>indexmap</cite> <cite>jagged</cite></p></li>
+<li><p><strong>value_public</strong> – set to true if the value is considered public</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.clean">
+<code class="sig-name descname"><span class="pre">clean</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all nodes from the analysis that do not have public descendants with released values.</p>
+<p>This can be helpful to clear away components that fail property checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.enter">
+<code class="sig-name descname"><span class="pre">enter</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.enter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.enter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current analysis as active.
+This allows building analyses outside of context managers, in a REPL environment.
+All new Components will be attributed to the entered analysis.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.exit">
+<code class="sig-name descname"><span class="pre">exit</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current analysis as inactive.</p>
+<p>Components constructed after exit() will not longer be attributed to the previously active analysis.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.plot">
+<code class="sig-name descname"><span class="pre">plot</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visual utility for graphing the analysis. Each component is a node, and arguments are edges.
+networkx and matplotlib are necessary, but must be installed separately</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.print_warnings">
+<code class="sig-name descname"><span class="pre">print_warnings</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.print_warnings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.print_warnings" title="Permalink to this definition">¶</a></dt>
+<dd><p>print internal warnings about failed nodes after running the graph dynamically</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.privacy_usage">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">privacy_usage</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the overall privacy usage of an analysis.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A privacy usage response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.release">
+<code class="sig-name descname"><span class="pre">release</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.release"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate an analysis and release the differentially private results.
+This function touches private data. It calls the runtime rust FFI with protobuf objects.</p>
+<p>The response is stored internally in the analysis instance and the all further components are computed in the next batch.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.report">
+<code class="sig-name descname"><span class="pre">report</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>FFI Helper. Generate a json string with a summary/report of the Analysis and Release
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>parsed JSON array of summaries of releases</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.update_properties">
+<code class="sig-name descname"><span class="pre">update_properties</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppress_warnings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.update_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.update_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>If new nodes have been added or there has been a release, recompute the properties for all of the components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Analysis.validate">
+<code class="sig-name descname"><span class="pre">validate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Analysis.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Analysis.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an analysis is differentially private, given a set of released values.
+This function is data agnostic. It calls the validator rust FFI with protobuf objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A success or failure response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.core.base.Component">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.base.</span></code><code class="sig-name descname"><span class="pre">Component</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation for the most atomic computation. There are helpers to construct these in components.py.</p>
+<p>The response from the helper functions are instances of this class.
+This class facilitates accessing releases, extending the graph, and viewing static properties.</p>
+<p>Many components are linked together to form an analysis graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The id of the component. A list of component id is here: <a class="reference external" href="https://opendifferentialprivacy.github.io/smartnoise-core/doc/smartnoise_validator/docs/components/index.html">https://opendifferentialprivacy.github.io/smartnoise-core/doc/smartnoise_validator/docs/components/index.html</a></p></li>
+<li><p><strong>arguments</strong> – Inputs to the component that come from prior nodes on the graph.</p></li>
+<li><p><strong>options</strong> – Inputs to the component that are passed directly via protobuf.</p></li>
+<li><p><strong>constraints</strong> – Additional modifiers on data inputs, like data_lower, or left_categories.</p></li>
+<li><p><strong>value</strong> – A value that is already known about the data, to be stored in the release.</p></li>
+<li><p><strong>value_format</strong> – The format of the value, one of <cite>array</cite>, <cite>jagged</cite>, <cite>indexmap</cite></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.actual_privacy_usage">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">actual_privacy_usage</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.actual_privacy_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a component is designed to potentially use less privacy usage than it was budgeted, this provides the reduced value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A privacy usage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.categories">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">categories</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived category set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.data_type">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">data_type</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived data type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.dimensionality">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dimensionality</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.dimensionality" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived dimensionality (number of axes)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.from_accuracy">
+<code class="sig-name descname"><span class="pre">from_accuracy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component.from_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component.from_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the privacy usage necessary such that the true value differs from the estimate by at most “value amount” with (1 - alpha)100% confidence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.get_accuracy">
+<code class="sig-name descname"><span class="pre">get_accuracy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">privacy_usage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component.get_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component.get_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the accuracy for the values released by the component.
+The true value differs from the estimate by at most “accuracy amount” with (1 - alpha)100% confidence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.get_parents">
+<code class="sig-name descname"><span class="pre">get_parents</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component.get_parents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component.get_parents" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all nodes that use this node as a dependency/argument.
+:return: {[node_id]: [parent]}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.lower">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">lower</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.lower" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived lower bound on the data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.nullity">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">nullity</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.nullity" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived nullity property on the data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.num_columns">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">num_columns</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.num_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived number of columns</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.num_records">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">num_records</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.num_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived number of records</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.of">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">of</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#opendp.smartnoise.core.base.Component" title="opendp.smartnoise.core.base.Component"><span class="pre">opendp.smartnoise.core.base.Component</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component.of"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component.of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an array, list of lists, or dictionary, attempt to wrap it in a component and place the value in the release.
+Loose literals are by default public.
+This is an alternative constructor for a Literal, that potentially doesn’t wrap the value in a Literal component if it is None or already a Component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – The value to be wrapped.</p></li>
+<li><p><strong>value_format</strong> – must be one of <cite>array</cite>, <cite>indexmap</cite>, <cite>jagged</cite></p></li>
+<li><p><strong>public</strong> – Loose literals are by default public.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Literal component with the value attached to the parent analysis’ release.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.partition_keys">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">partition_keys</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.partition_keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.properties">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">properties</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>view protobuf representing all known properties of the component</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.releasable">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">releasable</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.releasable" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the data from this component is releasable/public</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.set">
+<code class="sig-name descname"><span class="pre">set</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Component.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Component.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.upper">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">upper</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.upper" title="Permalink to this definition">¶</a></dt>
+<dd><p>view the statically derived upper bound on the data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opendp.smartnoise.core.base.Component.value">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">value</span></code><a class="headerlink" href="#opendp.smartnoise.core.base.Component.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the released values from the analysis’ release.
+If this returns None, then this node is not releasable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The value stored in the release corresponding to this node</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="opendp.smartnoise.core.base.Dataset">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">opendp.smartnoise.core.base.</span></code><code class="sig-name descname"><span class="pre">Dataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_row</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/opendp/smartnoise/core/base.html#Dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#opendp.smartnoise.core.base.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Datasets represent a single tabular resource. Datasets are assumed to be private, and may be loaded from csv files or as literal arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to a csv file on the filesystem. It is assumed that the csv file is well-formed.</p></li>
+<li><p><strong>skip_row</strong> – Set to True if the first row is the csv header. The csv header is always ignored.</p></li>
+<li><p><strong>column_names</strong> – Alternatively, the set of column names in the data resource.</p></li>
+<li><p><strong>value</strong> – Alternatively, a literal value/array to pass via protobuf</p></li>
+<li><p><strong>value_format</strong> – If ambiguous, the data format of the value (either array, indexmap or jagged)</p></li>
+<li><p><strong>public</strong> – Whether to flag the data in the dataset as public. This is of course private by default.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="opendp.smartnoise.core.api.html" title="previous page">opendp.smartnoise.core.api package</a>
+    <a class='right-next' id="next-link" href="opendp.smartnoise.core.components.html" title="next page">opendp.smartnoise.core.components package</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

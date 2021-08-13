@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>opendp.smartnoise.sql.parse &#8212; OpenDP</title>
+    <title>opendp.smartnoise.sql.parse &#8212; SmartNoise</title>
     
   <link href="../../../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
     
 
 <a class="navbar-brand" href="../../../../index.html">
-  <img src="../../../../_static/opendp-logo.png" class="logo" alt="logo">
+  <img src="../../../../_static/smartnoise-logo.svg" class="logo" alt="logo">
 </a>
 
 
@@ -68,26 +68,14 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../quickstart/index.html">
-  Quickstart
+ <a class="reference internal nav-link" href="../../../../overview.html">
+  SmartNoise Overview
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../user/index.html">
-  User Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../contrib/index.html">
-  Contributor Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../smartnoise/index.html">
-  SmartNoise
+ <a class="reference internal nav-link" href="../../../../api-reference/index.html">
+  SmartNoise API Reference
  </a>
 </li>
 
@@ -108,19 +96,7 @@
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/opendp_org" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp/opendp/discussions" rel="noopener" target="_blank" title="GitHub Discussions">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
             <span><i class="far fa-comments"></i></span>
             <label class="sr-only">GitHub Discussions</label>
           </a>
@@ -184,7 +160,7 @@
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.ast</span> <span class="kn">import</span> <span class="o">*</span>
 
 
-<div class="viewcode-block" id="QueryParser"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser">[docs]</a><span class="k">class</span> <span class="nc">QueryParser</span><span class="p">:</span>
+<div class="viewcode-block" id="QueryParser"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser">[docs]</a><span class="k">class</span> <span class="nc">QueryParser</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">metadata</span><span class="p">:</span>
             <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;opendp.smartnoise.metadata.collection&quot;</span><span class="p">),</span> <span class="s2">&quot;CollectionMetadata&quot;</span><span class="p">)</span>
@@ -192,7 +168,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="QueryParser.start_parser"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.start_parser">[docs]</a>    <span class="k">def</span> <span class="nf">start_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.start_parser"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.start_parser">[docs]</a>    <span class="k">def</span> <span class="nf">start_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
         <span class="n">lexer</span> <span class="o">=</span> <span class="n">SqlSmallLexer</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">CommonTokenStream</span><span class="p">(</span><span class="n">lexer</span><span class="p">)</span>
         <span class="n">parser</span> <span class="o">=</span> <span class="n">SqlSmallParser</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
@@ -201,7 +177,7 @@
         <span class="n">parser</span><span class="o">.</span><span class="n">_listeners</span> <span class="o">=</span> <span class="p">[</span><span class="n">SyntaxErrorListener</span><span class="p">(),</span> <span class="n">DiagnosticErrorListener</span><span class="p">()]</span>
         <span class="k">return</span> <span class="n">parser</span></div>
 
-<div class="viewcode-block" id="QueryParser.queries"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.queries">[docs]</a>    <span class="k">def</span> <span class="nf">queries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.queries"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.queries">[docs]</a>    <span class="k">def</span> <span class="nf">queries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
         <span class="k">elif</span> <span class="n">metadata</span><span class="p">:</span>
@@ -217,7 +193,7 @@
                 <span class="n">q</span><span class="o">.</span><span class="n">load_symbols</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">queries</span></div>
 
-<div class="viewcode-block" id="QueryParser.query"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.query"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.query">[docs]</a>    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">queries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queries</span><span class="p">(</span><span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Attempt to parse query resulted in a batch with more than one&quot;</span><span class="p">)</span>
@@ -226,7 +202,7 @@
             <span class="n">q</span><span class="o">.</span><span class="n">load_symbols</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">q</span></div>
 
-<div class="viewcode-block" id="QueryParser.parse_only"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_only">[docs]</a>    <span class="k">def</span> <span class="nf">parse_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.parse_only"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_only">[docs]</a>    <span class="k">def</span> <span class="nf">parse_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">query_string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;SELECT&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">query_string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span>
             <span class="s2">&quot;--&quot;</span>
         <span class="p">):</span>
@@ -237,13 +213,13 @@
         <span class="n">SqlSmallVisitor</span><span class="p">()</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">batch</span><span class="p">())</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="QueryParser.parse_named_expressions"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_named_expressions">[docs]</a>    <span class="k">def</span> <span class="nf">parse_named_expressions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression_string</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.parse_named_expressions"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_named_expressions">[docs]</a>    <span class="k">def</span> <span class="nf">parse_named_expressions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression_string</span><span class="p">):</span>
         <span class="n">istream</span> <span class="o">=</span> <span class="n">InputStream</span><span class="p">(</span><span class="n">expression_string</span><span class="p">)</span>
         <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_parser</span><span class="p">(</span><span class="n">istream</span><span class="p">)</span>
         <span class="n">nev</span> <span class="o">=</span> <span class="n">NamedExpressionVisitor</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">nev</span><span class="o">.</span><span class="n">visitNamedExpressionSeq</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">namedExpressionSeq</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="QueryParser.parse_expression"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_expression">[docs]</a>    <span class="k">def</span> <span class="nf">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression_string</span><span class="p">):</span>
+<div class="viewcode-block" id="QueryParser.parse_expression"><a class="viewcode-back" href="../../../../api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.parse_expression">[docs]</a>    <span class="k">def</span> <span class="nf">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression_string</span><span class="p">):</span>
         <span class="n">istream</span> <span class="o">=</span> <span class="n">InputStream</span><span class="p">(</span><span class="n">expression_string</span><span class="p">)</span>
         <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_parser</span><span class="p">(</span><span class="n">istream</span><span class="p">)</span>
         <span class="n">ev</span> <span class="o">=</span> <span class="n">ExpressionVisitor</span><span class="p">()</span>

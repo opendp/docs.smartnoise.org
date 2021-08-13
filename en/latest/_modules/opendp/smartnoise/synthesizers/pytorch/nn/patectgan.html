@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>opendp.smartnoise.synthesizers.pytorch.nn.patectgan &#8212; OpenDP</title>
+    <title>opendp.smartnoise.synthesizers.pytorch.nn.patectgan &#8212; SmartNoise</title>
     
   <link href="../../../../../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
     
 
 <a class="navbar-brand" href="../../../../../../index.html">
-  <img src="../../../../../../_static/opendp-logo.png" class="logo" alt="logo">
+  <img src="../../../../../../_static/smartnoise-logo.svg" class="logo" alt="logo">
 </a>
 
 
@@ -68,26 +68,14 @@
       <div class="navbar-center-item">
         <ul id="navbar-main-elements" class="navbar-nav">
     <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../../quickstart/index.html">
-  Quickstart
+ <a class="reference internal nav-link" href="../../../../../../overview.html">
+  SmartNoise Overview
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../../user/index.html">
-  User Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../../contrib/index.html">
-  Contributor Guide
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../../../../../smartnoise/index.html">
-  SmartNoise
+ <a class="reference internal nav-link" href="../../../../../../api-reference/index.html">
+  SmartNoise API Reference
  </a>
 </li>
 
@@ -108,19 +96,7 @@
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/opendp_org" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/opendp/opendp/discussions" rel="noopener" target="_blank" title="GitHub Discussions">
+          <a class="nav-link" href="https://github.com/opendp/opendp/discussions/categories/smartnoise" rel="noopener" target="_blank" title="GitHub Discussions">
             <span><i class="far fa-comments"></i></span>
             <label class="sr-only">GitHub Discussions</label>
           </a>
@@ -238,8 +214,8 @@
         <span class="k">return</span> <span class="n">dragan_penalty</span>
 
 
-<div class="viewcode-block" id="PATECTGAN"><a class="viewcode-back" href="../../../../../../smartnoise/api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN">[docs]</a><span class="k">class</span> <span class="nc">PATECTGAN</span><span class="p">(</span><span class="n">CTGANSynthesizer</span><span class="p">):</span>
-<div class="viewcode-block" id="PATECTGAN.__init__"><a class="viewcode-back" href="../../../../../../smartnoise/api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="PATECTGAN"><a class="viewcode-back" href="../../../../../../api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN">[docs]</a><span class="k">class</span> <span class="nc">PATECTGAN</span><span class="p">(</span><span class="n">CTGANSynthesizer</span><span class="p">):</span>
+<div class="viewcode-block" id="PATECTGAN.__init__"><a class="viewcode-back" href="../../../../../../api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
         <span class="n">gen_dim</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
@@ -292,7 +268,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pd_cols</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pd_index</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="PATECTGAN.train"><a class="viewcode-back" href="../../../../../../smartnoise/api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">categorical_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ordinal_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PATECTGAN.train"><a class="viewcode-back" href="../../../../../../api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">categorical_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ordinal_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">update_epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">update_epsilon</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">update_epsilon</span>
 
@@ -528,7 +504,7 @@
                     <span class="p">)</span>
                 <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PATECTGAN.w_loss"><a class="viewcode-back" href="../../../../../../smartnoise/api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.w_loss">[docs]</a>    <span class="k">def</span> <span class="nf">w_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<div class="viewcode-block" id="PATECTGAN.w_loss"><a class="viewcode-back" href="../../../../../../api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.w_loss">[docs]</a>    <span class="k">def</span> <span class="nf">w_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
         <span class="n">vals</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">labels</span><span class="p">,</span> <span class="n">output</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">ordered</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="n">vals</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()[</span><span class="mi">1</span><span class="p">]]</span>
         <span class="n">data_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ordered</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
@@ -537,7 +513,7 @@
         <span class="n">w_loss</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">true_score</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fake_score</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">w_loss</span></div>
 
-<div class="viewcode-block" id="PATECTGAN.generate"><a class="viewcode-back" href="../../../../../../smartnoise/api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="PATECTGAN.generate"><a class="viewcode-back" href="../../../../../../api-reference/opendp.smartnoise.synthesizers.pytorch.nn.html#opendp.smartnoise.synthesizers.pytorch.nn.PATECTGAN.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
         <span class="n">steps</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">+</span> <span class="mi">1</span>
