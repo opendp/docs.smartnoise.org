@@ -173,13 +173,14 @@
                 
   <h1>Source code for opendp.smartnoise.sql.reader.presto</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">sqlite3.dbapi2</span> <span class="kn">import</span> <span class="n">connect</span>
 
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.ast</span> <span class="kn">import</span> <span class="n">Relation</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.tokens</span> <span class="kn">import</span> <span class="n">Literal</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expression</span> <span class="kn">import</span> <span class="n">Expression</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expressions.numeric</span> <span class="kn">import</span> <span class="n">BareFunction</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expressions.sql</span> <span class="kn">import</span> <span class="n">BooleanJoinCriteria</span><span class="p">,</span> <span class="n">UsingJoinCriteria</span>
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SqlReader</span><span class="p">,</span> <span class="n">NameCompare</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SqlReader</span><span class="p">,</span> <span class="n">NameCompare</span><span class="p">,</span> <span class="n">Serializer</span>
 <span class="kn">from</span> <span class="nn">.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
 
 
@@ -191,16 +192,17 @@
 
     <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Engine</span><span class="o">.</span><span class="n">PRESTO</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">PrestoNameCompare</span><span class="p">())</span>
-        <span class="kn">import</span> <span class="nn">prestodb</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENGINE</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">prestodb</span><span class="o">.</span><span class="n">dbapi</span>
-
+        <span class="k">if</span> <span class="n">conn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">conn</span>
+    
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">&quot;PRESTO_PASSWORD&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
@@ -209,21 +211,27 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">update_connection_string</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PrestoReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrestoReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+<div class="viewcode-block" id="PrestoReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrestoReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Executes a raw SQL string against the database and returns</span>
 <span class="sd">            tuples for rows.  This will NOT fix the query to target the</span>
 <span class="sd">            specific SQL dialect.  Call execute_typed to fix dialect.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">prestodb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">prestodb</span><span class="o">.</span><span class="n">dbapi</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass strings to execute.  To execute ASTs, use execute_typed.&quot;</span><span class="p">)</span>
-        <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-            <span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
-            <span class="n">http_scheme</span><span class="o">=</span><span class="s2">&quot;https&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">==</span> <span class="mi">443</span> <span class="k">else</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span>
-            <span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-            <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
-            <span class="n">catalog</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+                <span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+                <span class="n">http_scheme</span><span class="o">=</span><span class="s2">&quot;https&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">==</span> <span class="mi">443</span> <span class="k">else</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span>
+                <span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+                <span class="n">catalog</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
@@ -252,6 +260,10 @@
 
     <span class="k">def</span> <span class="nf">identifier_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">meta</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_escapes</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_escapes</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">PrestoSerializer</span><span class="p">(</span><span class="n">Serializer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 </pre></div>
 
               </div>

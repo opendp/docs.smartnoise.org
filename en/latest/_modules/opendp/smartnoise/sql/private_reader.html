@@ -172,40 +172,71 @@
               <div>
                 
   <h1>Source code for opendp.smartnoise.sql.private_reader</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise.sql._mechanisms.accuracy</span> <span class="kn">import</span> <span class="n">Accuracy</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise.sql.odometer</span> <span class="kn">import</span> <span class="n">Odometer</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise.sql.privacy</span> <span class="kn">import</span> <span class="n">Privacy</span>
+
+<span class="kn">from</span> <span class="nn">opendp.smartnoise.sql.reader.base</span> <span class="kn">import</span> <span class="n">SqlReader</span>
 <span class="kn">from</span> <span class="nn">.dpsu</span> <span class="kn">import</span> <span class="n">run_dpsu</span>
 <span class="kn">from</span> <span class="nn">.private_rewriter</span> <span class="kn">import</span> <span class="n">Rewriter</span>
 <span class="kn">from</span> <span class="nn">.parse</span> <span class="kn">import</span> <span class="n">QueryParser</span>
 <span class="kn">from</span> <span class="nn">.reader</span> <span class="kn">import</span> <span class="n">PandasReader</span>
 
-<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.ast</span> <span class="kn">import</span> <span class="n">Top</span>
+<span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.ast</span> <span class="kn">import</span> <span class="n">Query</span><span class="p">,</span> <span class="n">Top</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise._ast.expressions</span> <span class="kn">import</span> <span class="n">sql</span> <span class="k">as</span> <span class="n">ast</span>
 <span class="kn">from</span> <span class="nn">opendp.smartnoise.reader</span> <span class="kn">import</span> <span class="n">Reader</span>
 
 <span class="kn">from</span> <span class="nn">._mechanisms.gaussian</span> <span class="kn">import</span> <span class="n">Gaussian</span>
-<span class="kn">from</span> <span class="nn">opendp.smartnoise.report</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">Intervals</span><span class="p">,</span> <span class="n">Result</span>
 
 <span class="n">module_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">itertools</span>
 
-
 <div class="viewcode-block" id="PrivateReader"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader">[docs]</a><span class="k">class</span> <span class="nc">PrivateReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Executes SQL queries against tabular data sources and returns differentially private results</span>
+    <span class="sd">&quot;&quot;&quot;Executes SQL queries against tabular data sources and returns differentially private results.</span>
+
+<span class="sd">    PrivateReader should be created using the `from_connection` factory method.  For example,</span>
+<span class="sd">    using pyodbc:</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        meta = &#39;datasets/PUMS.yaml&#39;</span>
+<span class="sd">        conn = pyodbc.connect(dsn)</span>
+<span class="sd">        privacy = Privacy(epsilon=0.1, delta=1/10000)</span>
+<span class="sd">        reader = PrivateReader.from_connection(conn, metadata=meta, privacy=privacy)</span>
+
+<span class="sd">        result = reader.execute(&#39;SELECT COUNT(*) AS n FROM PUMS.PUMS GROUP BY educ&#39;)</span>
+
+<span class="sd">    or using a Pandas dataframe:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        meta = &#39;datasets/PUMS.yaml&#39;</span>
+<span class="sd">        csv = &#39;datasets/PUMS.csv&#39;</span>
+<span class="sd">        pums = pd.read_csv(csv)</span>
+
+<span class="sd">        privacy = Privacy(epsilon=0.1, delta=1/10000)</span>
+<span class="sd">        reader = PrivateReader.from_connection(pums, metadata=meta, privacy=privacy)</span>
+
+<span class="sd">        result = reader.execute(&#39;SELECT COUNT(*) AS n FROM PUMS.PUMS GROUP BY educ&#39;)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">reader</span><span class="p">,</span>
         <span class="n">metadata</span><span class="p">,</span>
-        <span class="n">epsilon_per_column</span><span class="p">,</span>
+        <span class="n">epsilon_per_column</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">delta</span><span class="o">=</span><span class="mf">10e-16</span><span class="p">,</span>
-        <span class="n">interval_widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">ignore</span><span class="p">,</span>
+        <span class="n">privacy</span><span class="o">=</span><span class="kc">None</span>
+
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new private reader.</span>
 
@@ -214,9 +245,6 @@
 <span class="sd">                The PrivateReader intercepts queries to the underlying reader and ensures differential privacy.</span>
 <span class="sd">            :param epsilon_per_column: The privacy budget to spend for each column in the query</span>
 <span class="sd">            :param delta: The delta privacy parameter</span>
-<span class="sd">            :param interval_widths: If supplied, returns confidence intervals of the specified width, e.g. [0.95, 0.75]</span>
-<span class="sd">            :param options: A PrivateReaderOptions with flags that change the behavior of the privacy</span>
-<span class="sd">                engine.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># check for old calling convention</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">Reader</span><span class="p">):</span>
@@ -233,49 +261,51 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter reader must be of type Reader&quot;</span><span class="p">)</span>
 
-        <span class="c1"># using string here, because we don&#39;t want to import .metadata due to circular reference</span>
-        <span class="k">if</span> <span class="s2">&quot;metadata.collection.CollectionMetadata&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">metadata</span><span class="p">)):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Parameter metadata must be of type CollectionMetadata. Got </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">metadata</span><span class="p">)),</span>
-            <span class="p">)</span>
+        <span class="c1"># we can replace this when we remove</span>
+        <span class="c1"># CollectionMetadata from the root __init__</span>
+        <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;opendp.smartnoise.metadata.collection&quot;</span><span class="p">),</span> <span class="s2">&quot;CollectionMetadata&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">class_</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span> <span class="o">=</span> <span class="n">Rewriter</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_per_column</span> <span class="o">=</span> <span class="n">epsilon_per_column</span>
-        <span class="k">if</span> <span class="n">epsilon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;epsilon named parameter was replaced with &quot;</span>
-                <span class="s2">&quot;epsilon_per_column to be more descriptive.&quot;</span>
-            <span class="p">)</span>
-            <span class="k">if</span> <span class="n">epsilon</span> <span class="o">!=</span> <span class="n">epsilon_per_column</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">module_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Options has been deprecated.  Use metadata&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="n">PrivateReaderOptions</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interval_widths</span> <span class="o">=</span> <span class="n">interval_widths</span>
+        <span class="k">if</span> <span class="n">privacy</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span> <span class="o">=</span> <span class="n">privacy</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span> <span class="o">=</span> <span class="n">Privacy</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon_per_column</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">odometer</span> <span class="o">=</span> <span class="n">Odometer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_cached_exact</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cached_ast</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_options</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_options</span><span class="p">()</span>
+
+<div class="viewcode-block" id="PrivateReader.from_connection"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.from_connection">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_connection</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">privacy</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a private reader over an established SQL connection.  If `engine` is not</span>
+<span class="sd">        passed in, the engine will be automatically detected.</span>
+
+<span class="sd">        :param conn: An established database connection.  Can be pyodbc, psycopg2, SparkSession, Pandas DataFrame, or Presto.</span>
+<span class="sd">        :param privacy:  A Privacy object with epsilon, delta, and other privacy properties.  Keyword-only.</span>
+<span class="sd">        :param metadata: The metadata describing the database.  `Metadata documentation is here &lt;https://github.com/opendp/smartnoise-sdk/blob/new_opendp/sdk/Metadata.md&gt;`_.  Keyword-only.</span>
+<span class="sd">        :param engine: Optional keyword-only argument that can be used to specify engine-specific rules if automatic detection fails.  This should only be necessary when using an uncommon database or middleware.</span>
+<span class="sd">        :returns: A `PrivateReader` object initialized to process queries against the supplied connection, using the supplied `Privacy` properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_reader</span> <span class="o">=</span> <span class="n">SqlReader</span><span class="o">.</span><span class="n">from_connection</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PrivateReader</span><span class="p">(</span><span class="n">_reader</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">privacy</span><span class="o">=</span><span class="n">privacy</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">epsilon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">module_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="s2">&quot;Epsilon property will be replaced with &quot;</span>
-            <span class="s2">&quot;the more descriptive epsilon_per_column property.&quot;</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_per_column</span>
+    <span class="k">def</span> <span class="nf">engine</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The engine being used by this private reader.</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">            df = pd.read_csv(&#39;datasets/PUMS.csv&#39;)</span>
+<span class="sd">            reader = PrivateReader.from_connection(df, metadata=meta, privacy=privacy)</span>
+<span class="sd">            assert(reader.engine == &#39;pandas&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">engine</span>
 
-<div class="viewcode-block" id="PrivateReader.refresh_options"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.refresh_options">[docs]</a>    <span class="k">def</span> <span class="nf">refresh_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_refresh_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span> <span class="o">=</span> <span class="n">Rewriter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">compare</span>
         <span class="n">tables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">tables</span><span class="p">()</span>
@@ -290,13 +320,42 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">row_privacy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">row_privacy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">reservoir_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">reservoir_sample</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">clamp_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">clamp_columns</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">censor_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">censor_dims</span>
 
-<div class="viewcode-block" id="PrivateReader.get_budget_multiplier"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.get_budget_multiplier">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_budget_multiplier</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">reader</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">PrivateReader</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">get_privacy_cost</span><span class="p">(</span><span class="n">query</span><span class="p">))</span></div>
+<div class="viewcode-block" id="PrivateReader.get_budget_multiplier"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.get_budget_multiplier">[docs]</a>    <span class="k">def</span> <span class="nf">get_budget_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Analyzes the query and tells how many differentially private mechanism invocations</span>
+<span class="sd">         will be required to execute the query.  SUM and COUNT both use 1, while MEAN (composed of </span>
+<span class="sd">         a SUM divided by a COUNT) uses 2.  VAR and STDDEV use 3.</span>
 
-<div class="viewcode-block" id="PrivateReader.parse_query_string"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.parse_query_string">[docs]</a>    <span class="k">def</span> <span class="nf">parse_query_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+<span class="sd">            mul = priv.get_budget_multiplier(&#39;SELECT AVG(age) FROM PUMS.PUMS GROUP BY sex&#39;)</span>
+<span class="sd">            assert(mul == 2)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_options</span><span class="p">()</span>
+        <span class="n">subquery</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
+        <span class="n">mechs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mechanisms</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mechs</span> <span class="k">if</span> <span class="n">m</span><span class="p">])</span></div>
+    
+<div class="viewcode-block" id="PrivateReader.get_privacy_cost"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.get_privacy_cost">[docs]</a>    <span class="k">def</span> <span class="nf">get_privacy_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Estimates the epsilon and delta cost for running the given query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">odo</span> <span class="o">=</span> <span class="n">Odometer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_budget_multiplier</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
+        <span class="n">odo</span><span class="o">.</span><span class="n">spend</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">odo</span><span class="o">.</span><span class="n">spent</span></div>
+
+<div class="viewcode-block" id="PrivateReader.parse_query_string"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.parse_query_string">[docs]</a>    <span class="k">def</span> <span class="nf">parse_query_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Query</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Parse a query string using this `PrivateReader`&#39;s metadata, returning a `Query` from the AST.</span>
+
+<span class="sd">            reader = PrivateReader.from_connection(pums, metadata=meta, privacy=privacy)</span>
+<span class="sd">            query_string = &#39;SELECT STDDEV(age) AS age FROM PUMS.PUMS&#39;</span>
+<span class="sd">            query = reader.parse_query_string(query_string)</span>
+<span class="sd">            age_node = query.xpath_first(&quot;//NamedExpression[@name=&#39;age&#39;]&quot;)</span>
+<span class="sd">            dot = age_node.visualize() # visualize the formula in the AST</span>
+<span class="sd">            dot.render(&#39;age&#39;, view=True, cleanup=True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">queries</span> <span class="o">=</span> <span class="n">QueryParser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span><span class="o">.</span><span class="n">queries</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Too many queries provided.  We can only execute one query at a time.&quot;</span><span class="p">)</span>
@@ -304,24 +363,23 @@
             <span class="k">return</span> <span class="p">[]</span>
         <span class="k">return</span> <span class="n">queries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="PrivateReader.rewrite"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.rewrite">[docs]</a>    <span class="k">def</span> <span class="nf">rewrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_rewrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass a query string to _rewrite()&quot;</span><span class="p">)</span>
         <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_query_string</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewrite_ast</span><span class="p">(</span><span class="n">query</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_ast</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PrivateReader.rewrite_ast"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.rewrite_ast">[docs]</a>    <span class="k">def</span> <span class="nf">rewrite_ast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_rewrite_ast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass a Query AST object to _rewrite_ast()&quot;</span><span class="p">)</span>
         <span class="n">query_max_contrib</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">max_ids</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="o">&gt;</span> <span class="n">query_max_contrib</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="o">=</span> <span class="n">query_max_contrib</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_options</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_options</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewriter</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="n">subquery</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">relations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">query</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">subquery</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="PrivateReader.get_privacy_cost"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.get_privacy_cost">[docs]</a>    <span class="k">def</span> <span class="nf">get_privacy_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_options</span><span class="p">()</span>
-        <span class="n">subquery</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">subquery</span><span class="o">.</span><span class="n">numeric_symbols</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">subquery</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_ast</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span>
@@ -335,46 +393,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span>
 
-<div class="viewcode-block" id="PrivateReader.execute"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Executes a query and returns a recordset that is differentially private.</span>
-
-<span class="sd">        Follows ODBC and DB_API convention of consuming query as a string and returning</span>
-<span class="sd">        recordset as tuples.  This is useful for cases where existing DB_API clients</span>
-<span class="sd">        want to swap out API calls with minimal changes.</span>
-
-<span class="sd">        :param query_string: A query string in SQL syntax</span>
-<span class="sd">        :return: A recordset structured as an array of tuples, where each tuple</span>
-<span class="sd">         represents a row, and each item in the tuple is typed.  The first row should</span>
-<span class="sd">         contain column names.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_query_string</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">query</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_execute_ast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">cache_exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass AST to _execute_ast.&quot;</span><span class="p">)</span>
-
-        <span class="n">subquery</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewrite_ast</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_mechanisms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subquery</span><span class="p">:</span> <span class="n">Query</span><span class="p">):</span>
         <span class="n">max_contrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">thresh_scale</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">max_contrib</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
-            <span class="p">(</span>
-                <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">))</span>
-                <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_per_column</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="o">/</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_per_column</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">thresh_scale</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
-            <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">max_contrib</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">))</span>
-        <span class="p">)</span>
 
         <span class="n">syms</span> <span class="o">=</span> <span class="n">subquery</span><span class="o">.</span><span class="n">all_symbols</span><span class="p">()</span>
-        <span class="n">source_col_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">]</span>
 
         <span class="c1"># list of sensitivities in column order</span>
         <span class="n">sens</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sensitivity</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">]</span>
-
-        <span class="c1"># tell which are counts, in column order</span>
-        <span class="n">is_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">is_count</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">]</span>
 
         <span class="c1"># set sensitivity to None if the column is a grouping key</span>
         <span class="k">if</span> <span class="n">subquery</span><span class="o">.</span><span class="n">agg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -388,23 +413,73 @@
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sens</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">is_group_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
                 <span class="n">sens</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">s</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sens</span><span class="p">]):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Query is attempting to query an unbounded column that isn&#39;t part of the grouping key&quot;</span>
             <span class="p">)</span>
+        <span class="n">mechs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Gaussian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">epsilon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">delta</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">max_contrib</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sens</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">mechs</span>
+<div class="viewcode-block" id="PrivateReader.execute_with_accuracy"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.execute_with_accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">execute_with_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query_string</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrivateReader.execute_with_accuracy_df"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.execute_with_accuracy_df">[docs]</a>    <span class="k">def</span> <span class="nf">execute_with_accuracy_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">privacy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_df</span><span class="p">(</span><span class="n">query_string</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PrivateReader.execute"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PrivateReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Executes a query and returns a recordset that is differentially private.</span>
+
+<span class="sd">        Follows ODBC and DB_API convention of consuming query as a string and returning</span>
+<span class="sd">        recordset as tuples.  This is useful for cases where existing DB_API clients</span>
+<span class="sd">        want to swap out API calls with minimal changes.</span>
+
+<span class="sd">        :param query_string: A query string in SQL syntax</span>
+<span class="sd">        :return: A recordset structured as an array of tuples, where each tuple</span>
+<span class="sd">         represents a row, and each item in the tuple is typed.  The first row should</span>
+<span class="sd">         contain column names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_query_string</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="n">accuracy</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_execute_ast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cache_exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass AST to _execute_ast.&quot;</span><span class="p">)</span>
+
+        <span class="n">subquery</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rewrite_ast</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">max_contrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">max_contrib</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span>
+
+        <span class="n">_accuracy</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">accuracy</span><span class="p">:</span>
+            <span class="n">_accuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">subquery</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="p">)</span>
+
+        <span class="n">thresh_scale</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">max_contrib</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">delta</span><span class="p">))</span>
+                <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">thresh_scale</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+            <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">max_contrib</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">delta</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="n">syms</span> <span class="o">=</span> <span class="n">subquery</span><span class="o">.</span><span class="n">all_symbols</span><span class="p">()</span>
+        <span class="n">source_col_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">]</span>
+
+        <span class="c1"># tell which are counts, in column order</span>
+        <span class="n">is_count</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">is_count</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">]</span>
 
         <span class="n">kc_pos</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">syms</span><span class="p">)):</span>
-            <span class="n">sname</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="n">syms</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">sname</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">syms</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">sname</span> <span class="o">==</span> <span class="s2">&quot;keycount&quot;</span><span class="p">:</span>
                 <span class="n">kc_pos</span> <span class="o">=</span> <span class="n">idx</span>
 
-        <span class="c1"># make a list of mechanisms in column order</span>
-        <span class="n">mechs</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">Gaussian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon_per_column</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">max_contrib</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sens</span>
-        <span class="p">]</span>
+        <span class="c1"># get a list of mechanisms in column order</span>
+        <span class="n">mechs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mechanisms</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
 
         <span class="c1"># execute the subquery against the backend and load in tuples</span>
         <span class="k">if</span> <span class="n">cache_exact</span><span class="p">:</span>
@@ -412,6 +487,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_exact</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">subquery</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_ast</span><span class="p">:</span>
                     <span class="n">db_rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_exact</span>
+                    <span class="n">_accuracy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_accuracy</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                         <span class="s2">&quot;Cannot run different query against cached result.  &quot;</span>
@@ -421,9 +497,10 @@
                 <span class="n">db_rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_reader</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cached_exact</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db_rs</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cached_ast</span> <span class="o">=</span> <span class="n">subquery</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cached_accuracy</span> <span class="o">=</span> <span class="n">_accuracy</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cached_exact</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cached_ast</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cached_exact</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cached_ast</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">db_rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_reader</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
 
         <span class="n">clamp_counts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">clamp_counts</span>
@@ -433,7 +510,8 @@
             <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row_in</span><span class="p">]</span>
             <span class="c1"># set null to 0 before adding noise</span>
             <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">sens</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1">#if sens[idx] is not None and row[idx] is None:</span>
+                <span class="k">if</span> <span class="n">mechs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="c1"># call all mechanisms to add noise</span>
             <span class="n">out_row</span> <span class="o">=</span> <span class="p">[</span>
@@ -456,6 +534,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">process_row</span><span class="p">,</span> <span class="n">db_rs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
+        <span class="c1"># censor infrequent dimensions</span>
         <span class="k">if</span> <span class="n">subquery</span><span class="o">.</span><span class="n">agg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">censor_dims</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">kc_pos</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Query needs a key count column to censor dimensions&quot;</span><span class="p">)</span>
@@ -485,11 +564,21 @@
                     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t convert type &quot;</span> <span class="o">+</span> <span class="nb">type</span><span class="p">)</span>
+        
+
+        <span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">alphas</span><span class="p">]</span>
 
         <span class="k">def</span> <span class="nf">process_out_row</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
             <span class="n">bindings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">source_col_names</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bindings</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">namedExpressions</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">convert</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">out_types</span><span class="p">)]</span>
+            <span class="n">out_row</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bindings</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">namedExpressions</span><span class="p">]</span>
+            <span class="n">out_row</span> <span class="o">=</span><span class="p">[</span><span class="n">convert</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">out_row</span><span class="p">,</span> <span class="n">out_types</span><span class="p">)]</span>
+
+            <span class="c1"># compute accuracies</span>
+            <span class="k">if</span> <span class="n">accuracy</span> <span class="o">==</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">alphas</span><span class="p">:</span>
+                <span class="n">accuracies</span> <span class="o">=</span> <span class="p">[</span><span class="n">_accuracy</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span>
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">out_row</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">out_row</span><span class="p">,</span> <span class="p">[]])</span>
 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;map&quot;</span><span class="p">):</span>
             <span class="c1"># it&#39;s an RDD</span>
@@ -498,7 +587,7 @@
             <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">process_out_row</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">filter_aggregate</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
-            <span class="n">bindings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">out_col_names</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+            <span class="n">bindings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">out_col_names</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="n">keep</span> <span class="o">=</span> <span class="n">condition</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bindings</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">keep</span>
 
@@ -533,17 +622,19 @@
                 <span class="n">sort_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
 
             <span class="k">def</span> <span class="nf">sort_func</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-                <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="n">row_value</span><span class="p">,</span> <span class="n">accuracies</span> <span class="o">=</span> <span class="n">row</span>
+                <span class="n">out_row_value</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
                     <span class="p">[</span>
-                        <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                        <span class="n">row_value</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
                         <span class="k">if</span> <span class="ow">not</span> <span class="n">desc</span>
-                        <span class="k">else</span> <span class="ow">not</span> <span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                        <span class="k">else</span> <span class="ow">not</span> <span class="n">row_value</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
                         <span class="k">if</span> <span class="n">out_types</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;boolean&quot;</span>
-                        <span class="k">else</span> <span class="o">-</span><span class="n">row</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                        <span class="k">else</span> <span class="o">-</span><span class="n">row_value</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
                         <span class="k">for</span> <span class="n">desc</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">sort_fields</span>
                     <span class="p">]</span>
                 <span class="p">)</span>
-
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">out_row_value</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">])</span>
+                
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;sortBy&quot;</span><span class="p">):</span>
                 <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="n">sort_func</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -567,19 +658,35 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">out</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">limit_rows</span><span class="p">)</span>
 
+        <span class="c1"># drop empty accuracy if no accuracy requested</span>
+        <span class="k">def</span> <span class="nf">drop_accuracy</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">accuracy</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;map&quot;</span><span class="p">):</span>
+                <span class="c1"># it&#39;s an RDD</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">drop_accuracy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">drop_accuracy</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+        <span class="c1"># increment odometer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">odometer</span><span class="o">.</span><span class="n">spend</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mechs</span> <span class="k">if</span> <span class="n">m</span><span class="p">]))</span>
+
         <span class="c1"># output it</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;toDF&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">accuracy</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;toDF&quot;</span><span class="p">):</span>
             <span class="c1"># Pipeline RDD</span>
             <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">toDF</span><span class="p">(</span><span class="n">out_col_names</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;map&quot;</span><span class="p">):</span>
             <span class="c1"># Bare RDD</span>
             <span class="k">return</span> <span class="n">out</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">out_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_col_names</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+            <span class="n">row0</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_col_names</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">accuracy</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">row0</span> <span class="o">=</span> <span class="p">[[</span><span class="n">out_col_names</span><span class="p">,</span> <span class="p">[[</span><span class="n">col_name</span><span class="o">+</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">out_col_names</span><span class="p">]</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">privacy</span><span class="o">.</span><span class="n">alphas</span> <span class="p">]]]</span>
+            <span class="n">out_rows</span> <span class="o">=</span> <span class="n">row0</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">out_rows</span>
 
     <span class="k">def</span> <span class="nf">_execute_ast_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">cache_exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">cache_exact</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_execute_ast</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">cache_exact</span><span class="o">=</span><span class="n">cache_exact</span><span class="p">))</span></div>
 
 
 <span class="k">class</span> <span class="nc">PrivateReaderOptions</span><span class="p">:</span>

@@ -173,6 +173,7 @@
                 
   <h1>Source code for opendp.smartnoise.sql.parse</h1><div class="highlight"><pre>
 <span></span>
+<span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">from</span> <span class="nn">.parser.SqlSmallLexer</span> <span class="kn">import</span> <span class="n">SqlSmallLexer</span>  <span class="c1"># type: ignore</span>
 <span class="kn">from</span> <span class="nn">.parser.SqlSmallParser</span> <span class="kn">import</span> <span class="n">SqlSmallParser</span>  <span class="c1"># type: ignore</span>
 <span class="kn">from</span> <span class="nn">.parser.SqlSmallVisitor</span> <span class="kn">import</span> <span class="n">SqlSmallVisitor</span>  <span class="c1"># type: ignore</span>
@@ -185,7 +186,11 @@
 
 <div class="viewcode-block" id="QueryParser"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser">[docs]</a><span class="k">class</span> <span class="nc">QueryParser</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;opendp.smartnoise.metadata.collection&quot;</span><span class="p">),</span> <span class="s2">&quot;CollectionMetadata&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">class_</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="QueryParser.start_parser"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.start_parser">[docs]</a>    <span class="k">def</span> <span class="nf">start_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
         <span class="n">lexer</span> <span class="o">=</span> <span class="n">SqlSmallLexer</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
@@ -199,6 +204,10 @@
 <div class="viewcode-block" id="QueryParser.queries"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.QueryParser.queries">[docs]</a>    <span class="k">def</span> <span class="nf">queries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_string</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
+        <span class="k">elif</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">class_</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;opendp.smartnoise.metadata.collection&quot;</span><span class="p">),</span> <span class="s2">&quot;CollectionMetadata&quot;</span><span class="p">)</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">class_</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
         <span class="n">istream</span> <span class="o">=</span> <span class="n">InputStream</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
         <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_parser</span><span class="p">(</span><span class="n">istream</span><span class="p">)</span>
         <span class="n">bv</span> <span class="o">=</span> <span class="n">BatchVisitor</span><span class="p">()</span>

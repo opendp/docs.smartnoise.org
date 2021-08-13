@@ -175,6 +175,7 @@
 <span></span><span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">opendp.smartnoise.sql.reader.base</span> <span class="kn">import</span> <span class="n">NameCompare</span>
 
@@ -229,6 +230,21 @@
         <span class="sd">&quot;&quot;&quot;Load the metadata from a dict object&quot;&quot;&quot;</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">CollectionYamlLoader</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ys</span><span class="o">.</span><span class="n">_create_metadata_object</span><span class="p">(</span><span class="n">schema_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CollectionMetadata.from_"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.from_">[docs]</a>    <span class="nd">@classmethod</span> 
+    <span class="k">def</span> <span class="nf">from_</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">CollectionMetadata</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">val</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># could allow YAML strings here.  Throw for now</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to load metadata path </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metadata needs to be string, dictionary, or CollectionMetadata.  Got </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CollectionMetadata.to_file"><a class="viewcode-back" href="../../../../smartnoise/api-reference/opendp.smartnoise.metadata.html#opendp.smartnoise.metadata.CollectionMetadata.to_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">collection_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save collection metadata to a YAML file&quot;&quot;&quot;</span>

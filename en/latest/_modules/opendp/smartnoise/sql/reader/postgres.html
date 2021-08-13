@@ -174,7 +174,7 @@
   <h1>Source code for opendp.smartnoise.sql.reader.postgres</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SqlReader</span><span class="p">,</span> <span class="n">NameCompare</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SqlReader</span><span class="p">,</span> <span class="n">NameCompare</span><span class="p">,</span> <span class="n">Serializer</span>
 <span class="kn">from</span> <span class="nn">.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
 
 
@@ -186,27 +186,33 @@
 
     <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Engine</span><span class="o">.</span><span class="n">POSTGRES</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">PostgresNameCompare</span><span class="p">(),</span> <span class="n">PostgresSerializer</span><span class="p">())</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENGINE</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">psycopg2</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">psycopg2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
 
-        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;POSTGRES_PASSWORD&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-                <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;POSTGRES_PASSWORD&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">conn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">conn</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># generate a connection string</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_connection_string</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;POSTGRES_PASSWORD&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;POSTGRES_PASSWORD&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_connection_string</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PostgresReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PostgresReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+<div class="viewcode-block" id="PostgresReader.execute"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PostgresReader.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">ignore</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please pass strings to execute.  To execute ASTs, use execute_typed.&quot;</span><span class="p">)</span>
-        <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
+        <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+        <span class="k">if</span> <span class="n">cnxn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cnxn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -216,11 +222,7 @@
             <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">col_names</span> <span class="o">+</span> <span class="n">rows</span></div>
 
-<div class="viewcode-block" id="PostgresReader.update_connection_string"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PostgresReader.update_connection_string">[docs]</a>    <span class="k">def</span> <span class="nf">update_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Executes a parsed AST and returns a typed recordset.</span>
-<span class="sd">            Will fix to target approprate dialect. Needs symbols.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_update_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">=</span> <span class="s2">&quot;user=&#39;</span><span class="si">{0}</span><span class="s2">&#39; host=&#39;</span><span class="si">{1}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">+=</span> <span class="p">(</span>
             <span class="s2">&quot; dbname=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
@@ -228,17 +230,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">+=</span> <span class="s2">&quot; port=</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span> <span class="o">+=</span> <span class="p">(</span>
             <span class="s2">&quot; password=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="PostgresReader.switch_database"><a class="viewcode-back" href="../../../../../smartnoise/api-reference/opendp.smartnoise.sql.html#opendp.smartnoise.sql.PostgresReader.switch_database">[docs]</a>    <span class="k">def</span> <span class="nf">switch_database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dbname</span><span class="p">):</span>
         <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">c &quot;</span> <span class="o">+</span> <span class="n">dbname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div></div>
-
-
-<span class="k">class</span> <span class="nc">PostgresSerializer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-
 
 <span class="k">class</span> <span class="nc">PostgresNameCompare</span><span class="p">(</span><span class="n">NameCompare</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -264,6 +260,11 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
+
+<span class="k">class</span> <span class="nc">PostgresSerializer</span><span class="p">(</span><span class="n">Serializer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
 </pre></div>
 
               </div>
