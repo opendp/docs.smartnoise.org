@@ -37,7 +37,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'OpenDP'
+project = u'SmartNoise'
 copyright = u'%d' % datetime.now().year
 
 # The version info for the project you're documenting, acts as replacement for
@@ -60,7 +60,7 @@ pygments_style = 'sphinx'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> Documentation".
-html_title = 'OpenDP'
+html_title = 'SmartNoise'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -76,12 +76,10 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub Discussions",
-            "url": "https://github.com/opendp/opendp/discussions",
+            "url": "https://github.com/opendp/opendp/discussions/categories/smartnoise",
             "icon": "far fa-comments",
         },
     ],
-    "twitter_url": "https://twitter.com/opendp_org",
-    "github_url": "https://github.com/opendp"
 }
 
 html_theme = 'pydata_sphinx_theme'
@@ -100,9 +98,9 @@ pygments_style = 'sphinx'
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
-htmlhelp_basename = 'OpenDPdoc'
+htmlhelp_basename = 'SmartNoisedoc'
 
-html_logo = "_static/images/opendp-logo.png"
+html_logo = "_static/images/smartnoise-logo.svg"
 
 rst_prolog = """
 .. |toctitle| replace:: Contents:

@@ -1,22 +1,21 @@
-OpenDP Documentation
-====================
+SmartNoise Documentation
+========================
 
-|opendp-logo|
+|smartnoise-logo|
 
-OpenDP documentation is organized into the guides below. In addition to browsing, you can :ref:`search <search>`.
+SmartNoise documentation is organized into the guides below. In addition to browsing, you can :ref:`search <search>`.
 
 .. toctree::
   :glob:
   :titlesonly:
   :maxdepth: 2
 
-  quickstart/index
-  user/index
-  contrib/index
-  smartnoise/index
+  overview
+  api-reference/index
   contact/index
 
 This is version |version| of the guides.
 
-.. |opendp-logo| image:: _static/images/opendp-logo.png
+.. |smartnoise-logo| image:: _static/images/smartnoise-logo.svg
    :class: img-responsive
+   :width: 10%

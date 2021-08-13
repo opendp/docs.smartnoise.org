@@ -54,7 +54,7 @@ In addition the `smartnoise-samples`_ repository includes a set of exemplar note
 
 
 
-.. |smartnoise-repositories| image:: ../_static/images/smartnoise-repositories-numbered4.png
+.. |smartnoise-repositories| image:: _static/images/smartnoise-repositories-numbered4.png
    :class: img-responsive
    :width: 100%
 
@@ -77,19 +77,19 @@ This package gives access to all of the :doc:`SmartNoise core components <api-re
 
 
 
-.. |smartnoise-fig-education| image:: ../_static/images/figs/example_education.png
+.. |smartnoise-fig-education| image:: _static/images/figs/example_education.png
    :class: img-responsive
    :width: 20%
 
-.. |smartnoise-fig-simulations| image:: ../_static/images/figs/example_simulations.png
+.. |smartnoise-fig-simulations| image:: _static/images/figs/example_simulations.png
    :class: img-responsive
    :width: 20%
 
-.. |smartnoise-fig-size| image:: ../_static/images/figs/example_size.png
+.. |smartnoise-fig-size| image:: _static/images/figs/example_size.png
    :class: img-responsive
    :width: 20%
 
-.. |smartnoise-fig-utility| image:: ../_static/images/figs/example_utility.png
+.. |smartnoise-fig-utility| image:: _static/images/figs/example_utility.png
    :class: img-responsive
    :width: 20%
 
