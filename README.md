@@ -1,3 +1,9 @@
+## DEPRECATED!
+
+- Note: [docs.smartnoise.org](https://docs.smartnoise.org/) is now built directly from the [SmartNoise SDK repository](https://github.com/opendp/smartnoise-sdk)
+
+---
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![CI](https://github.com/opendp/docs.smartnoise.org/actions/workflows/main.yml/badge.svg)
 
